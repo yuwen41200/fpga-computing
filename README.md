@@ -6,7 +6,10 @@ This is a subproject of [sunset1995/Leilei_Face-tracking_Algorithm](https://gith
 
 ## Information ##
 
-The targeted board is Xilinx Virtex-5 ML506.
+The targeted board is Xilinx Virtex-5 ML506.  
+The host program runs on Ubuntu Linux 14.04 LTS.
 
-Some files are not added due to copyright considerations.  
-However, one can download them for free from [xillybus.com](http://xillybus.com/) for academic purposes.
+This project uses an Xillybus IP core for data transmission over an PCIe interface.  
+One can download it for free from [xillybus.com](http://xillybus.com/) for academic purposes.
+
+The RTL design is done with Xilinx ISE Design Suite 14.7.

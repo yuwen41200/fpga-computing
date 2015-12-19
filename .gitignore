@@ -1,21 +1,14 @@
-# Some of the following are ignored:
-#   ISE project files
-#   Xilinx proprietary files
-#   Xillybus proprietary files
-
 blockplus/coregen.log
 blockplus/edit_pcie_v5.tcl
 blockplus/iseconfig/
 blockplus/pcie_v5/
 blockplus/pcie_v5_flist.txt
 blockplus/pcie_v5.gise
-blockplus/pcie_v5_gtx.xco
+blockplus/pcie_v5.xise
 blockplus/pcie_v5.veo
-blockplus/pcie_v5.xco
 blockplus/pcie_v5.xlpp
 blockplus/pcie_v5_xmdf.tcl
 blockplus/prepare.gise
-blockplus/prepare.xise
 blockplus/tmp/
 blockplus/_xmsgs/
 verilog/_impact.cmd
@@ -79,7 +72,6 @@ verilog/src/fifo_32x512.ngc
 verilog/src/fifo_32x512.sym
 verilog/src/fifo_32x512.v
 verilog/src/fifo_32x512.veo
-verilog/src/fifo_32x512.xco
 verilog/src/fifo_32x512.xise
 verilog/src/fifo_32x512_xmdf.tcl
 verilog/src/fifo_8x2048.asy
@@ -90,7 +82,6 @@ verilog/src/fifo_8x2048.ngc
 verilog/src/fifo_8x2048.sym
 verilog/src/fifo_8x2048.v
 verilog/src/fifo_8x2048.veo
-verilog/src/fifo_8x2048.xco
 verilog/src/fifo_8x2048.xise
 verilog/src/fifo_8x2048_xmdf.tcl
 verilog/src/fifo_generator_readme.txt
