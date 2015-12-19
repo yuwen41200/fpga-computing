@@ -1,0 +1,32 @@
+# Placing the PCIe port. Pins are allocated automatically according to this
+
+INST "*/pcie_ep0/pcie_blk/SIO/.pcie_gt_wrapper_i/GTD[0].GT_i" LOC = GTP_DUAL_X0Y1;
+
+NET  "PCIE_REFCLK_P"       LOC = "AF4"  ;
+NET  "PCIE_REFCLK_N"       LOC = "AF3"  ;
+#NET  "PCIE_PERST_B_LS"     LOC = "XX"  ;
+
+# Some LEDs. Not really necessary
+NET "GPIO_LED[0]" LOC = "H18";
+NET "GPIO_LED[1]" LOC = "L18";
+NET "GPIO_LED[2]" LOC = "G15";
+NET "GPIO_LED[3]" LOC = "AD26";
+
+# BlockRAM placement. Not clear how necessary this is.
+#
+INST "*/pcie_ep0/pcie_blk/pcie_mim_wrapper_i/bram_tl_tx/generate_tdp2[1].ram_tdp2_inst" LOC =RAMB36_X4Y7 ;
+INST "*/pcie_ep0/pcie_blk/pcie_mim_wrapper_i/bram_tl_rx/generate_tdp2[1].ram_tdp2_inst" LOC =RAMB36_X4Y6 ;
+INST "*/pcie_ep0/pcie_blk/pcie_mim_wrapper_i/bram_tl_tx/generate_tdp2[0].ram_tdp2_inst" LOC =RAMB36_X4Y5 ;
+INST "*/pcie_ep0/pcie_blk/pcie_mim_wrapper_i/bram_tl_rx/generate_tdp2[0].ram_tdp2_inst" LOC =RAMB36_X4Y4 ;
+INST "*/pcie_ep0/pcie_blk/pcie_mim_wrapper_i/bram_retry/generate_sdp.ram_sdp_inst"      LOC =RAMB36_X4Y8 ;
+
+# Timing contraints for a 100 MHz reference clock.
+NET "xillybus_ins/pcie_ref_clk"  PERIOD = 10ns;
+NET "*/pcie_ep0/pcie_blk/SIO/.pcie_gt_wrapper_i/gt_refclk_out" TNM_NET = "MGTCLK" ;
+TIMESPEC "TS_MGTCLK"  = PERIOD "MGTCLK" 100.00 MHz HIGH 50 % ;
+
+# Set termination for reference clock
+INST "xillybus_ins/pcieclk_ibuf"     DIFF_TERM = "TRUE" ;
+
+
+
