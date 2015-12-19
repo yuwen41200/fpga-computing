@@ -18,8 +18,6 @@ blockplus/prepare.gise
 blockplus/prepare.xise
 blockplus/tmp/
 blockplus/_xmsgs/
-verilog/demo-done.cfi
-verilog/demo-done.prm
 verilog/_impact.cmd
 verilog/_impact.log
 verilog/iseconfig/
@@ -31,6 +29,7 @@ verilog/webtalk_pn.xml
 verilog/xillydemo.bgn
 verilog/xillydemo_bitgen.xwbt
 verilog/xillydemo.bld
+verilog/xillydemo.cfi
 verilog/xillydemo.cmd_log
 verilog/xillydemo.drc
 verilog/xillydemo_envsettings.html
@@ -54,6 +53,7 @@ verilog/xillydemo.par
 verilog/xillydemo_par.xrpt
 verilog/xillydemo.pcf
 verilog/xillydemo.prj
+verilog/xillydemo.prm
 verilog/xillydemo.ptwx
 verilog/xillydemo.stx
 verilog/xillydemo_summary.html
