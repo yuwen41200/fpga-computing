@@ -46,7 +46,6 @@ void fpgaRead(int fileDescriptor, unsigned char *buffer, int length) {
 			fprintf(stderr, "Reached read EOF.\n");
 			exit(0);
 		}
-
 		received += rc;
 	}
 }

@@ -2,7 +2,7 @@
 
 Research Project on FPGA Parallel Heterogeneous Computing
 
-This is a subproject of [sunset1995/Leilei_Face-tracking_Algorithm](https://github.com/sunset1995/Leilei_Face-tracking_Algorithm).
+This is a subproject of [sunset1995/parallel_analysis](https://github.com/sunset1995/parallel_analysis).
 
 ## Information ##
 
