@@ -4,7 +4,7 @@ Research Project on FPGA Parallel Heterogeneous Computing
 
 This is a subproject of [sunset1995/parallel_analysis](https://github.com/sunset1995/parallel_analysis).
 
-## Information ##
+## Introduction ##
 
 The targeted board is Xilinx Virtex-5 ML506.  
 The host program runs on Ubuntu Linux 14.04 LTS.
