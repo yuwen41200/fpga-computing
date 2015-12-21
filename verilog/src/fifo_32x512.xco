@@ -1,7 +1,7 @@
 ##############################################################
 #
 # Xilinx Core Generator version 14.7
-# Date: Fri Dec 18 09:37:48 2015
+# Date: Mon Dec 21 14:34:22 2015
 #
 ##############################################################
 #
@@ -76,9 +76,9 @@ CSET underflow_sense=Active_High
 CSET use_dout_reset=true
 CSET use_embedded_registers=false
 CSET use_extra_logic=false
-CSET valid_flag=false
+CSET valid_flag=true
 CSET valid_sense=Active_High
-CSET write_acknowledge_flag=false
+CSET write_acknowledge_flag=true
 CSET write_acknowledge_sense=Active_High
 CSET write_clock_frequency=1
 CSET write_data_count=false
@@ -88,4 +88,4 @@ CSET write_data_count_width=9
 MISC pkg_timestamp=2013-10-13T18:46:09Z
 # END Extra information
 GENERATE
-# CRC: 4f9f71af
+# CRC:  985e721
