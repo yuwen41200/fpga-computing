@@ -4,7 +4,7 @@ module xillydemo (
 	input PCIE_PERST_B_LS,
 	input PCIE_RX0_N,
 	input PCIE_RX0_P,
-	output [3:0] GPIO_LED,
+	output [7:0] GPIO_LED,
 	output PCIE_TX0_N,
 	output PCIE_TX0_P
 );
@@ -50,6 +50,8 @@ wire        recv_enabled;
 wire [31:0] recv_data;
 wire        recv_valid;
 
+integer iterator;
+
 /**
  * Sending State Signals
  */
@@ -63,11 +65,10 @@ wire        send_full;
  * Executing State Signals
  */
 
-reg  [15:0] data      [0:511];
+reg  [15:0] in_data   [0:511];
 reg         in_valid  [0:511];
+wire [15:0] out_data  [0:511];
 wire        out_valid [0:511];
-
-integer i;
 
 /**
  * Xillybus PCIe Interface Logic
@@ -90,7 +91,7 @@ xillybus xillybus_ins (
 	.PCIE_PERST_B_LS(PCIE_PERST_B_LS),
 	.PCIE_RX0_N(PCIE_RX0_N),
 	.PCIE_RX0_P(PCIE_RX0_P),
-	.GPIO_LED(GPIO_LED),
+	.GPIO_LED(GPIO_LED[3:0]),
 	.PCIE_TX0_N(PCIE_TX0_N),
 	.PCIE_TX0_P(PCIE_TX0_P),
 
@@ -105,7 +106,7 @@ fifo_32x512 fifo_out (
 	.wr_en(user_w_write_32_wren),      // Input
 	.din(user_w_write_32_data),        // Input
 	.full(user_w_write_32_full),       // Output
-	.wr_ack(),                         // Output
+	.almost_full(),                    // Output
 
 	.rd_en(recv_enabled),              // Input
 	.dout(recv_data),                  // Output
@@ -119,8 +120,8 @@ fifo_32x512 fifo_in (
 
 	.wr_en(send_enabled),              // Input
 	.din(send_data),                   // Input
-	.full(send_full),                  // Output
-	.wr_ack(),                         // Output
+	.full(),                           // Output
+	.almost_full(send_full),           // Output
 
 	.rd_en(user_r_read_32_rden),       // Input
 	.dout(user_r_read_32_data),        // Output
@@ -134,6 +135,7 @@ assign user_r_read_32_eof = 0;
  * Finite State Machine Logic
  */
 
+assign GPIO_LED[7:4] = curr_state;
 assign exec_done = out_valid[511];
 
 always @(posedge bus_clk) begin
@@ -177,18 +179,51 @@ assign recv_enabled = (curr_state == RECV_STATE) ? 1 : 0;
 always @(posedge bus_clk) begin
 	if (curr_state == RECV_STATE) begin
 		if (recv_valid) begin
-			data[recv_counter] <= recv_data[15:0];
-			data[recv_counter+1] <= recv_data[31:16];
-			in_valid[recv_counter] <= 1;
+			in_data[recv_counter]    <= recv_data[15:0];
+			in_data[recv_counter+1]  <= recv_data[31:16];
+			in_valid[recv_counter]   <= 1;
 			in_valid[recv_counter+1] <= 1;
 			recv_counter <= recv_counter + 2;
 		end
 	end
 	else begin
-		for (i = 0; i < 512; i = i + 1)
-			in_valid[i] <= 0;
+		for (iterator = 0; iterator < 512; iterator = iterator + 1) begin
+			in_valid[iterator] <= 0;
+		end
 		recv_counter <= 0;
 	end
 end
+
+/**
+ * Sending State Logic
+ */
+
+assign send_enabled = (curr_state == SEND_STATE) ? 1 : 0;
+assign send_data[15:0]  = out_data[send_counter];
+assign send_data[31:16] = out_data[send_counter+1];
+
+always @(posedge bus_clk) begin
+	if (curr_state == SEND_STATE)
+		if (~send_full)
+			send_counter <= send_counter + 2;
+	else
+		send_counter <= 0;
+end
+
+/**
+ * Executing State Logic
+ */
+
+generate
+	genvar thread_no;
+	for (thread_no = 0; thread_no < 512; thread_no = thread_no + 1) begin:warp
+		kernel kernel_ins (
+			.in_data(in_data[thread_no]),
+			.in_valid(in_valid[thread_no]),
+			.out_data(out_data[thread_no]),
+			.out_valid(out_valid[thread_no])
+		);
+	end
+endgenerate
 
 endmodule
