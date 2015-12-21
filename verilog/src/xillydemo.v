@@ -9,86 +9,80 @@ module xillydemo (
 	output PCIE_TX0_P
 );
 
+/**
+ * Xillybus PCIe Interface Signals
+ */
+
 wire        bus_clk;                   // Output - The PCIe clock.
 wire        quiesce;                   // Output - The host does not load Xillybus.
 
-reg  [7:0]  demoarray [0:31];          // Internal memory array.
+wire        user_r_read_32_rden;       // Output - Read data from FIFO.
+wire        user_r_read_32_empty;      // Input  - The FIFO is empty, stop reading.
+wire [31:0] user_r_read_32_data;       // Input  - The data to be read.
+wire        user_r_read_32_eof;        // Input  - End of file is reached, stop reading.
+wire        user_r_read_32_open;       // Output - The host opens the device file with read mode.
 
-wire        user_r_mem_8_rden;         // Output - Read data from FIFO.
-wire        user_r_mem_8_empty;        // Input  - The FIFO is empty, stop reading.
-reg  [7:0]  user_r_mem_8_data;         // Input  - The data to be read.
-wire        user_r_mem_8_eof;          // Input  - End of file is reached, stop reading.
-wire        user_r_mem_8_open;         // Output - The host opens the device file with read mode.
-wire        user_w_mem_8_wren;         // Output - Write data to FIFO.
-wire        user_w_mem_8_full;         // Input  - The FIFO is full, stop writing.
-wire [7:0]  user_w_mem_8_data;         // Output - The data to be write.
-wire        user_w_mem_8_open;         // Output - The host opens the device file with write mode.
-wire [4:0]  user_mem_8_addr;           // Output - The address to read or write.
-wire        user_mem_8_addr_update;    // Output - The host seeks the device file.
+wire        user_w_write_32_wren;      // Output - Write data to FIFO.
+wire        user_w_write_32_full;      // Input  - The FIFO is full, stop writing.
+wire [31:0] user_w_write_32_data;      // Output - The data to be write.
+wire        user_w_write_32_open;      // Output - The host opens the device file with write mode.
 
-wire        user_r_read_32_rden;       // The meanings of the following wires are same as above.
-wire        user_r_read_32_empty;
-wire [31:0] user_r_read_32_data;
-wire        user_r_read_32_eof;
-wire        user_r_read_32_open;
+/**
+ * Finite State Machine Signals
+ */
 
-wire        user_r_read_8_rden;
-wire        user_r_read_8_empty;
-wire [7:0]  user_r_read_8_data;
-wire        user_r_read_8_eof;
-wire        user_r_read_8_open;
+parameter [3:0] IDLE_STATE = 4'b0001;
+parameter [3:0] RECV_STATE = 4'b0010;
+parameter [3:0] EXEC_STATE = 4'b0100;
+parameter [3:0] SEND_STATE = 4'b1000;
 
-wire        user_w_write_32_wren;
-wire        user_w_write_32_full;
-wire [31:0] user_w_write_32_data;
-wire        user_w_write_32_open;
+reg [3:0] curr_state;
+reg [3:0] next_state;
 
-wire        user_w_write_8_wren;
-wire        user_w_write_8_full;
-wire [7:0]  user_w_write_8_data;
-wire        user_w_write_8_open;
+/**
+ * Receiving State Signals
+ */
+
+reg  [9:0]  recv_counter;
+wire        recv_enabled;
+wire [31:0] recv_data;
+wire        recv_valid;
+
+/**
+ * Sending State Signals
+ */
+
+reg  [9:0]  send_counter;
+wire        send_enabled;
+wire [31:0] send_data;
+wire        send_full;
+
+/**
+ * Executing State Signals
+ */
+
+reg  [15:0] data      [0:511];
+reg         in_valid  [0:511];
+wire        out_valid [0:511];
+
+integer i;
+
+/**
+ * Xillybus PCIe Interface Logic
+ */
 
 xillybus xillybus_ins (
-	// Ports related to /dev/xillybus_mem_8
-	.user_r_mem_8_rden(user_r_mem_8_rden),
-	.user_r_mem_8_empty(user_r_mem_8_empty),
-	.user_r_mem_8_data(user_r_mem_8_data),
-	.user_r_mem_8_eof(user_r_mem_8_eof),
-	.user_r_mem_8_open(user_r_mem_8_open),
-	.user_w_mem_8_wren(user_w_mem_8_wren),
-	.user_w_mem_8_full(user_w_mem_8_full),
-	.user_w_mem_8_data(user_w_mem_8_data),
-	.user_w_mem_8_open(user_w_mem_8_open),
-	.user_mem_8_addr(user_mem_8_addr),
-	.user_mem_8_addr_update(user_mem_8_addr_update),
-
-	// Ports related to /dev/xillybus_read_32
 	.user_r_read_32_rden(user_r_read_32_rden),
 	.user_r_read_32_empty(user_r_read_32_empty),
 	.user_r_read_32_data(user_r_read_32_data),
 	.user_r_read_32_eof(user_r_read_32_eof),
 	.user_r_read_32_open(user_r_read_32_open),
 
-	// Ports related to /dev/xillybus_write_32
 	.user_w_write_32_wren(user_w_write_32_wren),
 	.user_w_write_32_full(user_w_write_32_full),
 	.user_w_write_32_data(user_w_write_32_data),
 	.user_w_write_32_open(user_w_write_32_open),
 
-	// Ports related to /dev/xillybus_read_8
-	.user_r_read_8_rden(user_r_read_8_rden),
-	.user_r_read_8_empty(user_r_read_8_empty),
-	.user_r_read_8_data(user_r_read_8_data),
-	.user_r_read_8_eof(user_r_read_8_eof),
-	.user_r_read_8_open(user_r_read_8_open),
-
-	// Ports related to /dev/xillybus_write_8
-	.user_w_write_8_wren(user_w_write_8_wren),
-	.user_w_write_8_full(user_w_write_8_full),
-	.user_w_write_8_data(user_w_write_8_data),
-	.user_w_write_8_open(user_w_write_8_open),
-
-	// Signals to top level
 	.PCIE_REFCLK_N(PCIE_REFCLK_N),
 	.PCIE_REFCLK_P(PCIE_REFCLK_P),
 	.PCIE_PERST_B_LS(PCIE_PERST_B_LS),
@@ -97,48 +91,100 @@ xillybus xillybus_ins (
 	.GPIO_LED(GPIO_LED),
 	.PCIE_TX0_N(PCIE_TX0_N),
 	.PCIE_TX0_P(PCIE_TX0_P),
+
 	.bus_clk(bus_clk),
 	.quiesce(quiesce)
 );
 
-// A simple inferred RAM
-always @(posedge bus_clk) begin
-	if (user_w_mem_8_wren)
-		demoarray[user_mem_8_addr] <= user_w_mem_8_data;
-	if (user_r_mem_8_rden)
-		user_r_mem_8_data <= demoarray[user_mem_8_addr];	  
-end
-
-assign user_r_mem_8_empty = 0;
-assign user_r_mem_8_eof   = 0;
-assign user_w_mem_8_full  = 0;
-
-// 32-bit loopback
 fifo_32x512 fifo_32 (
-	.clk(bus_clk),
-	.srst(!user_w_write_32_open && !user_r_read_32_open),
-	.din(user_w_write_32_data),
-	.wr_en(user_w_write_32_wren),
-	.rd_en(user_r_read_32_rden),
-	.dout(user_r_read_32_data),
-	.full(user_w_write_32_full),
-	.empty(user_r_read_32_empty)
+	.clk(bus_clk),                     // Input
+	.srst(~user_w_write_32_open),      // Input
+
+	.wr_en(user_w_write_32_wren),      // Input
+	.din(user_w_write_32_data),        // Input
+	.full(user_w_write_32_full),       // Output
+	.wr_ack(),                         // Output
+
+	.rd_en(recv_enabled),              // Input
+	.dout(recv_data),                  // Output
+	.empty(),                          // Output
+	.valid(recv_valid)                 // Output
+);
+
+fifo_32x512 fifo_32 (
+	.clk(bus_clk),                     // Input
+	.srst(~user_r_read_32_open),       // Input
+
+	.wr_en(send_enabled),              // Input
+	.din(send_data),                   // Input
+	.full(send_full),                  // Output
+	.wr_ack(),                         // Output
+
+	.rd_en(user_r_read_32_rden),       // Input
+	.dout(user_r_read_32_data),        // Output
+	.empty(user_r_read_32_empty),      // Output
+	.valid()                           // Output
 );
 
 assign user_r_read_32_eof = 0;
 
-// 8-bit loopback
-fifo_8x2048 fifo_8 (
-	.clk(bus_clk),
-	.srst(!user_w_write_8_open && !user_r_read_8_open),
-	.din(user_w_write_8_data),
-	.wr_en(user_w_write_8_wren),
-	.rd_en(user_r_read_8_rden),
-	.dout(user_r_read_8_data),
-	.full(user_w_write_8_full),
-	.empty(user_r_read_8_empty)
-);
+/**
+ * Finite State Machine Logic
+ */
 
-assign user_r_read_8_eof = 0;
-	
+always @(posedge bus_clk) begin
+	if (quiesce || ~user_w_write_32_open || ~user_r_read_32_open)
+		curr_state <= IDLE_STATE;
+	else
+		curr_state <= next_state;
+end
+
+always @(*) begin
+	case (curr_state)
+		IDLE_STATE:
+			if (user_w_write_32_open && user_r_read_32_open)
+				next_state = RECV_STATE;
+			else
+				next_state = IDLE_STATE;
+		RECV_STATE:
+			if (recv_counter == 510)
+				next_state = EXEC_STATE;
+			else
+				next_state = RECV_STATE;
+		EXEC_STATE:
+			if (out_valid[511])
+				next_state = SEND_STATE;
+			else
+				next_state = EXEC_STATE;
+		SEND_STATE:
+			if (send_counter == 510)
+				next_state = IDLE_STATE;
+			else
+				next_state = SEND_STATE;
+	endcase
+end
+
+/**
+ * Receiving State Logic
+ */
+
+assign recv_enabled = (curr_state == RECV_STATE) 1 : 0;
+
+always @(posedge bus_clk) begin
+	if (curr_state == RECV_STATE) begin
+		if (recv_valid) begin
+			data[recv_counter] <= recv_data[15:0];
+			data[recv_counter+1] <= recv_data[31:16];
+			in_valid[recv_counter] <= 1;
+			in_valid[recv_counter+1] <= 1;
+			recv_counter <= recv_counter + 2;
+		end
+	end
+	else begin
+		for (i = 0; i < 512; i = i + 1)
+			in_valid[i] <= 0;
+		recv_counter <= 0;
+	end
+end
+
 endmodule
