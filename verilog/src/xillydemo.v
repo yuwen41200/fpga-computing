@@ -39,6 +39,8 @@ parameter [3:0] SEND_STATE = 4'b1000;
 reg [3:0] curr_state;
 reg [3:0] next_state;
 
+wire exec_done;
+
 /**
  * Receiving State Signals
  */
@@ -96,7 +98,7 @@ xillybus xillybus_ins (
 	.quiesce(quiesce)
 );
 
-fifo_32x512 fifo_32 (
+fifo_32x512 fifo_out (
 	.clk(bus_clk),                     // Input
 	.srst(~user_w_write_32_open),      // Input
 
@@ -111,7 +113,7 @@ fifo_32x512 fifo_32 (
 	.valid(recv_valid)                 // Output
 );
 
-fifo_32x512 fifo_32 (
+fifo_32x512 fifo_in (
 	.clk(bus_clk),                     // Input
 	.srst(~user_r_read_32_open),       // Input
 
@@ -131,6 +133,8 @@ assign user_r_read_32_eof = 0;
 /**
  * Finite State Machine Logic
  */
+
+assign exec_done = out_valid[511];
 
 always @(posedge bus_clk) begin
 	if (quiesce || ~user_w_write_32_open || ~user_r_read_32_open)
@@ -152,7 +156,7 @@ always @(*) begin
 			else
 				next_state = RECV_STATE;
 		EXEC_STATE:
-			if (out_valid[511])
+			if (exec_done)
 				next_state = SEND_STATE;
 			else
 				next_state = EXEC_STATE;
@@ -168,7 +172,7 @@ end
  * Receiving State Logic
  */
 
-assign recv_enabled = (curr_state == RECV_STATE) 1 : 0;
+assign recv_enabled = (curr_state == RECV_STATE) ? 1 : 0;
 
 always @(posedge bus_clk) begin
 	if (curr_state == RECV_STATE) begin
