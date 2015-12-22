@@ -186,7 +186,7 @@ always @(posedge bus_clk) begin
 			recv_counter <= recv_counter + 2;
 		end
 	end
-	else begin
+	else if (curr_state == IDLE_STATE) begin
 		for (iterator = 0; iterator < 512; iterator = iterator + 1) begin
 			in_valid[iterator] <= 0;
 		end
