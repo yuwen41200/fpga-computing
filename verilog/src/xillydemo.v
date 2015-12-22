@@ -45,7 +45,7 @@ wire exec_done;
  * Receiving State Signals
  */
 
-reg  [9:0]  recv_counter;
+reg  [8:0]  recv_counter;
 wire        recv_enabled;
 wire [31:0] recv_data;
 wire        recv_valid;
@@ -56,7 +56,7 @@ integer iterator;
  * Sending State Signals
  */
 
-reg  [9:0]  send_counter;
+reg  [8:0]  send_counter;
 wire        send_enabled;
 wire [31:0] send_data;
 wire        send_full;
@@ -218,6 +218,7 @@ generate
 	genvar thread_no;
 	for (thread_no = 0; thread_no < 512; thread_no = thread_no + 1) begin:warp
 		kernel kernel_ins (
+			.clk(bus_clk),
 			.in_data(in_data[thread_no]),
 			.in_valid(in_valid[thread_no]),
 			.out_data(out_data[thread_no]),

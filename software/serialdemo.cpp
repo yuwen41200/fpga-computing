@@ -29,19 +29,19 @@ int main() {
 	// Calculate frame 0.
 	for (int i = 0; i < 1920; ++i)
 		for (int j = 0; j < 1080; ++j)
-			for (int k = 0; k < ((i + j) >> 7); ++k)
+			for (int k = 0; k < 1024; ++k)
 				frame0[i][j] = frame0[i][j] + (frame0[i][j] >> 3);
 
 	// Calculate frame 1.
 	for (int i = 0; i < 1920; ++i)
 		for (int j = 0; j < 1080; ++j)
-			for (int k = 0; k < ((i + j) >> 7); ++k)
+			for (int k = 0; k < 1024; ++k)
 				frame1[i][j] = frame1[i][j] + (frame1[i][j] >> 3);
 
 	// Calculate frame 2.
 	for (int i = 0; i < 1920; ++i)
 		for (int j = 0; j < 1080; ++j)
-			for (int k = 0; k < ((i + j) >> 7); ++k)
+			for (int k = 0; k < 1024; ++k)
 				frame2[i][j] = frame2[i][j] + (frame2[i][j] >> 3);
 
 	// Finish extremely large calculation.
