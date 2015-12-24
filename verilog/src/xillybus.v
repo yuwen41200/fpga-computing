@@ -1,3 +1,5 @@
+// This file is part of the Xillybus project.
+
 `timescale 1ns / 10ps
 
 module xillybus(PCIE_TX0_P, PCIE_TX0_N, PCIE_RX0_P, PCIE_RX0_N, PCIE_REFCLK_P,
@@ -83,7 +85,7 @@ module xillybus(PCIE_TX0_P, PCIE_TX0_N, PCIE_RX0_P, PCIE_RX0_N, PCIE_REFCLK_P,
 
    IBUFDS pcieclk_ibuf (.O(pcie_ref_clk), .I(PCIE_REFCLK_P), .IB(PCIE_REFCLK_N));
 
-   pcie_v5 pcie
+   pcie_v5 pcie 
      (
       .pci_exp_txp( PCIE_TX0_P ),
       .pci_exp_txn( PCIE_TX0_N ),
@@ -92,7 +94,7 @@ module xillybus(PCIE_TX0_P, PCIE_TX0_N, PCIE_RX0_P, PCIE_RX0_N, PCIE_REFCLK_P,
 
       .sys_clk(pcie_ref_clk),
       .sys_reset_n( PCIE_PERST_B_LS ),
-
+      
       .refclkout( ),
 
       .trn_clk(bus_clk),
@@ -205,9 +207,9 @@ module xillybus(PCIE_TX0_P, PCIE_TX0_N, PCIE_RX0_P, PCIE_RX0_N, PCIE_REFCLK_P,
     .user_w_write_8_open_w(user_w_write_8_open), .user_r_mem_8_rden_w(user_r_mem_8_rden),
     .user_r_mem_8_data_w(user_r_mem_8_data), .user_r_mem_8_empty_w(user_r_mem_8_empty),
     .user_r_mem_8_eof_w(user_r_mem_8_eof), .user_r_mem_8_open_w(user_r_mem_8_open),
-    .bus_clk_w(bus_clk), .user_w_mem_8_wren_w(user_w_mem_8_wren),
-    .user_w_mem_8_data_w(user_w_mem_8_data), .user_w_mem_8_full_w(user_w_mem_8_full),
-    .user_w_mem_8_open_w(user_w_mem_8_open), .user_mem_8_addr_w(user_mem_8_addr),
+    .user_w_mem_8_wren_w(user_w_mem_8_wren), .user_w_mem_8_data_w(user_w_mem_8_data),
+    .user_w_mem_8_full_w(user_w_mem_8_full), .user_w_mem_8_open_w(user_w_mem_8_open),
+    .bus_clk_w(bus_clk), .user_mem_8_addr_w(user_mem_8_addr),
     .user_mem_8_addr_update_w(user_mem_8_addr_update));
 
 endmodule

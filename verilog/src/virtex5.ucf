@@ -8,10 +8,10 @@ NET "GPIO_LED[0]" LOC = "H18"  ;
 NET "GPIO_LED[1]" LOC = "L18"  ;
 NET "GPIO_LED[2]" LOC = "G15"  ;
 NET "GPIO_LED[3]" LOC = "AD26" ;
-NET "GPIO_LED[4]" LOC = "G16" ;
-NET "GPIO_LED[5]" LOC = "AD25" ;
-NET "GPIO_LED[6]" LOC = "AD24" ;
-NET "GPIO_LED[7]" LOC = "AE24" ;
+#NET "GPIO_LED[4]" LOC = "G16" ;
+#NET "GPIO_LED[5]" LOC = "AD25" ;
+#NET "GPIO_LED[6]" LOC = "AD24" ;
+#NET "GPIO_LED[7]" LOC = "AE24" ;
 
 # BlockRAM placement. Not clear how necessary this is.
 INST "*/pcie_ep0/pcie_blk/pcie_mim_wrapper_i/bram_tl_tx/generate_tdp2[1].ram_tdp2_inst" LOC =RAMB36_X4Y7 ;

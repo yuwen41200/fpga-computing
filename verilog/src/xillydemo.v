@@ -4,7 +4,7 @@ module xillydemo (
 	input PCIE_PERST_B_LS,
 	input PCIE_RX0_N,
 	input PCIE_RX0_P,
-	output [7:0] GPIO_LED,
+	output [3:0] GPIO_LED,
 	output PCIE_TX0_N,
 	output PCIE_TX0_P
 );
@@ -12,6 +12,32 @@ module xillydemo (
 /**
  * Xillybus PCIe Interface Signals
  */
+
+   // Wires related to /dev/xillybus_mem_8
+   wire       user_r_mem_8_rden;
+   wire       user_r_mem_8_empty;
+   reg [7:0]  user_r_mem_8_data;
+   wire       user_r_mem_8_eof;
+   wire       user_r_mem_8_open;
+   wire       user_w_mem_8_wren;
+   wire       user_w_mem_8_full;
+   wire [7:0] user_w_mem_8_data;
+   wire       user_w_mem_8_open;
+   wire [4:0] user_mem_8_addr;
+   wire       user_mem_8_addr_update;
+
+   // Wires related to /dev/xillybus_read_8
+   wire        user_r_read_8_rden;
+   wire        user_r_read_8_empty;
+   wire [7:0]  user_r_read_8_data;
+   wire        user_r_read_8_eof;
+   wire        user_r_read_8_open;
+
+   // Wires related to /dev/xillybus_write_8
+   wire        user_w_write_8_wren;
+   wire        user_w_write_8_full;
+   wire [7:0]  user_w_write_8_data;
+   wire        user_w_write_8_open;
 
 wire        bus_clk;                   // Output - The PCIe clock.
 wire        quiesce;                   // Output - The host does not load Xillybus.
@@ -65,16 +91,52 @@ wire        send_full;
  * Executing State Signals
  */
 
-reg  [15:0] in_data   [0:511];
-reg         in_valid  [0:511];
-wire [15:0] out_data  [0:511];
-wire        out_valid [0:511];
+parameter [9:0] THREAD_NUMBER = 256;
+
+reg  [15:0] in_data   [0:THREAD_NUMBER-1];
+reg         in_valid  [0:THREAD_NUMBER-1];
+wire [15:0] out_data  [0:THREAD_NUMBER-1];
+wire        out_valid [0:THREAD_NUMBER-1];
 
 /**
  * Xillybus PCIe Interface Logic
  */
 
 xillybus xillybus_ins (
+
+			  // Ports related to /dev/xillybus_mem_8
+			  // FPGA to CPU signals:
+			  .user_r_mem_8_rden(user_r_mem_8_rden),
+			  .user_r_mem_8_empty(user_r_mem_8_empty),
+			  .user_r_mem_8_data(user_r_mem_8_data),
+			  .user_r_mem_8_eof(user_r_mem_8_eof),
+			  .user_r_mem_8_open(user_r_mem_8_open),
+
+			  // CPU to FPGA signals:
+			  .user_w_mem_8_wren(user_w_mem_8_wren),
+			  .user_w_mem_8_full(user_w_mem_8_full),
+			  .user_w_mem_8_data(user_w_mem_8_data),
+			  .user_w_mem_8_open(user_w_mem_8_open),
+
+			  // Address signals:
+			  .user_mem_8_addr(user_mem_8_addr),
+			  .user_mem_8_addr_update(user_mem_8_addr_update),
+
+			  // Ports related to /dev/xillybus_read_8
+			  // FPGA to CPU signals:
+			  .user_r_read_8_rden(user_r_read_8_rden),
+			  .user_r_read_8_empty(user_r_read_8_empty),
+			  .user_r_read_8_data(user_r_read_8_data),
+			  .user_r_read_8_eof(user_r_read_8_eof),
+			  .user_r_read_8_open(user_r_read_8_open),
+
+			  // Ports related to /dev/xillybus_write_8
+			  // CPU to FPGA signals:
+			  .user_w_write_8_wren(user_w_write_8_wren),
+			  .user_w_write_8_full(user_w_write_8_full),
+			  .user_w_write_8_data(user_w_write_8_data),
+			  .user_w_write_8_open(user_w_write_8_open),
+
 	.user_r_read_32_rden(user_r_read_32_rden),
 	.user_r_read_32_empty(user_r_read_32_empty),
 	.user_r_read_32_data(user_r_read_32_data),
@@ -91,7 +153,7 @@ xillybus xillybus_ins (
 	.PCIE_PERST_B_LS(PCIE_PERST_B_LS),
 	.PCIE_RX0_N(PCIE_RX0_N),
 	.PCIE_RX0_P(PCIE_RX0_P),
-	.GPIO_LED(GPIO_LED[3:0]),
+	.GPIO_LED(GPIO_LED),
 	.PCIE_TX0_N(PCIE_TX0_N),
 	.PCIE_TX0_P(PCIE_TX0_P),
 
@@ -135,8 +197,8 @@ assign user_r_read_32_eof = 0;
  * Finite State Machine Logic
  */
 
-assign GPIO_LED[7:4] = curr_state;
-assign exec_done = out_valid[511];
+//assign GPIO_LED[7:4] = curr_state;
+assign exec_done = out_valid[THREAD_NUMBER-1];
 
 always @(posedge bus_clk) begin
 	if (quiesce || ~user_w_write_32_open || ~user_r_read_32_open)
@@ -153,7 +215,7 @@ always @(*) begin
 			else
 				next_state = IDLE_STATE;
 		RECV_STATE:
-			if (recv_counter == 510)
+			if (recv_counter == THREAD_NUMBER-2)
 				next_state = EXEC_STATE;
 			else
 				next_state = RECV_STATE;
@@ -163,7 +225,7 @@ always @(*) begin
 			else
 				next_state = EXEC_STATE;
 		SEND_STATE:
-			if (send_counter == 510)
+			if (send_counter == THREAD_NUMBER-2)
 				next_state = IDLE_STATE;
 			else
 				next_state = SEND_STATE;
@@ -187,7 +249,7 @@ always @(posedge bus_clk) begin
 		end
 	end
 	else if (curr_state == IDLE_STATE) begin
-		for (iterator = 0; iterator < 512; iterator = iterator + 1) begin
+		for (iterator = 0; iterator < THREAD_NUMBER; iterator = iterator + 1) begin
 			in_valid[iterator] <= 0;
 		end
 		recv_counter <= 0;
@@ -216,7 +278,7 @@ end
 
 generate
 	genvar thread_no;
-	for (thread_no = 0; thread_no < 512; thread_no = thread_no + 1) begin:warp
+	for (thread_no = 0; thread_no < THREAD_NUMBER; thread_no = thread_no + 1) begin:warp
 		kernel kernel_ins (
 			.clk(bus_clk),
 			.in_data(in_data[thread_no]),
