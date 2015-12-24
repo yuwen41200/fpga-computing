@@ -91,3 +91,5 @@ verilog/src/gen_fifo_8x2048.tcl
 verilog/src/tmp/
 verilog/src/xlnx_auto_0_xdb/
 verilog/src/_xmsgs/
+verilog/src/edit_fifo_32x512.tcl
+verilog/xillydemo.mcs
