@@ -150,7 +150,6 @@ fifo_32x512 fifo_out (
 	.wr_en(user_w_write_32_wren),      // Input
 	.din(user_w_write_32_data),        // Input
 	.full(user_w_write_32_full),       // Output
-	.almost_full(),                    // Output
 
 	.rd_en(recv_enabled),              // Input
 	.dout(recv_data),                  // Output
@@ -165,7 +164,6 @@ fifo_32x512 fifo_in (
 	.wr_en(send_enabled),              // Input
 	.din(send_data),                   // Input
 	.full(send_full),                  // Output
-	.almost_full(),                    // Output
 
 	.rd_en(user_r_read_32_rden),       // Input
 	.dout(user_r_read_32_data),        // Output

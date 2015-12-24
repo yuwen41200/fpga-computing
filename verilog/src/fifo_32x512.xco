@@ -1,7 +1,7 @@
 ##############################################################
 #
 # Xilinx Core Generator version 14.7
-# Date: Thu Dec 24 15:54:53 2015
+# Date: Thu Dec 24 17:31:34 2015
 #
 ##############################################################
 #
@@ -40,7 +40,7 @@ SELECT Fifo_Generator family Xilinx,_Inc. 6.2
 # END Select
 # BEGIN Parameters
 CSET almost_empty_flag=false
-CSET almost_full_flag=true
+CSET almost_full_flag=false
 CSET component_name=fifo_32x512
 CSET data_count=false
 CSET data_count_width=9
@@ -88,4 +88,4 @@ CSET write_data_count_width=9
 MISC pkg_timestamp=2013-10-13T18:46:09Z
 # END Extra information
 GENERATE
-# CRC: 72257d96
+# CRC: 7edd2219
