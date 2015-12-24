@@ -13,31 +13,26 @@ module xillydemo (
  * Xillybus PCIe Interface Signals
  */
 
-   // Wires related to /dev/xillybus_mem_8
-   wire       user_r_mem_8_rden;
-   wire       user_r_mem_8_empty;
-   reg [7:0]  user_r_mem_8_data;
-   wire       user_r_mem_8_eof;
-   wire       user_r_mem_8_open;
-   wire       user_w_mem_8_wren;
-   wire       user_w_mem_8_full;
-   wire [7:0] user_w_mem_8_data;
-   wire       user_w_mem_8_open;
-   wire [4:0] user_mem_8_addr;
-   wire       user_mem_8_addr_update;
-
-   // Wires related to /dev/xillybus_read_8
-   wire        user_r_read_8_rden;
-   wire        user_r_read_8_empty;
-   wire [7:0]  user_r_read_8_data;
-   wire        user_r_read_8_eof;
-   wire        user_r_read_8_open;
-
-   // Wires related to /dev/xillybus_write_8
-   wire        user_w_write_8_wren;
-   wire        user_w_write_8_full;
-   wire [7:0]  user_w_write_8_data;
-   wire        user_w_write_8_open;
+wire        user_r_mem_8_rden;         // These signals have no special meanings.
+wire        user_r_mem_8_empty;        // Not sure if they are necessary or not.
+reg  [7:0]  user_r_mem_8_data;
+wire        user_r_mem_8_eof;
+wire        user_r_mem_8_open;
+wire        user_w_mem_8_wren;
+wire        user_w_mem_8_full;
+wire [7:0]  user_w_mem_8_data;
+wire        user_w_mem_8_open;
+wire [4:0]  user_mem_8_addr;
+wire        user_mem_8_addr_update;
+wire        user_r_read_8_rden;
+wire        user_r_read_8_empty;
+wire [7:0]  user_r_read_8_data;
+wire        user_r_read_8_eof;
+wire        user_r_read_8_open;
+wire        user_w_write_8_wren;
+wire        user_w_write_8_full;
+wire [7:0]  user_w_write_8_data;
+wire        user_w_write_8_open;       // End of these unused signals.
 
 wire        bus_clk;                   // Output - The PCIe clock.
 wire        quiesce;                   // Output - The host does not load Xillybus.
@@ -103,39 +98,26 @@ wire        out_valid [0:THREAD_NUMBER-1];
  */
 
 xillybus xillybus_ins (
-
-			  // Ports related to /dev/xillybus_mem_8
-			  // FPGA to CPU signals:
-			  .user_r_mem_8_rden(user_r_mem_8_rden),
-			  .user_r_mem_8_empty(user_r_mem_8_empty),
-			  .user_r_mem_8_data(user_r_mem_8_data),
-			  .user_r_mem_8_eof(user_r_mem_8_eof),
-			  .user_r_mem_8_open(user_r_mem_8_open),
-
-			  // CPU to FPGA signals:
-			  .user_w_mem_8_wren(user_w_mem_8_wren),
-			  .user_w_mem_8_full(user_w_mem_8_full),
-			  .user_w_mem_8_data(user_w_mem_8_data),
-			  .user_w_mem_8_open(user_w_mem_8_open),
-
-			  // Address signals:
-			  .user_mem_8_addr(user_mem_8_addr),
-			  .user_mem_8_addr_update(user_mem_8_addr_update),
-
-			  // Ports related to /dev/xillybus_read_8
-			  // FPGA to CPU signals:
-			  .user_r_read_8_rden(user_r_read_8_rden),
-			  .user_r_read_8_empty(user_r_read_8_empty),
-			  .user_r_read_8_data(user_r_read_8_data),
-			  .user_r_read_8_eof(user_r_read_8_eof),
-			  .user_r_read_8_open(user_r_read_8_open),
-
-			  // Ports related to /dev/xillybus_write_8
-			  // CPU to FPGA signals:
-			  .user_w_write_8_wren(user_w_write_8_wren),
-			  .user_w_write_8_full(user_w_write_8_full),
-			  .user_w_write_8_data(user_w_write_8_data),
-			  .user_w_write_8_open(user_w_write_8_open),
+	.user_r_mem_8_rden(user_r_mem_8_rden),
+	.user_r_mem_8_empty(user_r_mem_8_empty),
+	.user_r_mem_8_data(user_r_mem_8_data),
+	.user_r_mem_8_eof(user_r_mem_8_eof),
+	.user_r_mem_8_open(user_r_mem_8_open),
+	.user_w_mem_8_wren(user_w_mem_8_wren),
+	.user_w_mem_8_full(user_w_mem_8_full),
+	.user_w_mem_8_data(user_w_mem_8_data),
+	.user_w_mem_8_open(user_w_mem_8_open),
+	.user_mem_8_addr(user_mem_8_addr),
+	.user_mem_8_addr_update(user_mem_8_addr_update),
+	.user_r_read_8_rden(user_r_read_8_rden),
+	.user_r_read_8_empty(user_r_read_8_empty),
+	.user_r_read_8_data(user_r_read_8_data),
+	.user_r_read_8_eof(user_r_read_8_eof),
+	.user_r_read_8_open(user_r_read_8_open),
+	.user_w_write_8_wren(user_w_write_8_wren),
+	.user_w_write_8_full(user_w_write_8_full),
+	.user_w_write_8_data(user_w_write_8_data),
+	.user_w_write_8_open(user_w_write_8_open),
 
 	.user_r_read_32_rden(user_r_read_32_rden),
 	.user_r_read_32_empty(user_r_read_32_empty),
@@ -182,8 +164,8 @@ fifo_32x512 fifo_in (
 
 	.wr_en(send_enabled),              // Input
 	.din(send_data),                   // Input
-	.full(),                           // Output
-	.almost_full(send_full),           // Output
+	.full(send_full),                  // Output
+	.almost_full(),                    // Output
 
 	.rd_en(user_r_read_32_rden),       // Input
 	.dout(user_r_read_32_data),        // Output
@@ -197,7 +179,6 @@ assign user_r_read_32_eof = 0;
  * Finite State Machine Logic
  */
 
-//assign GPIO_LED[7:4] = curr_state;
 assign exec_done = out_valid[THREAD_NUMBER-1];
 
 always @(posedge bus_clk) begin
