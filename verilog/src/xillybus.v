@@ -85,7 +85,7 @@ module xillybus(PCIE_TX0_P, PCIE_TX0_N, PCIE_RX0_P, PCIE_RX0_N, PCIE_REFCLK_P,
 
    IBUFDS pcieclk_ibuf (.O(pcie_ref_clk), .I(PCIE_REFCLK_P), .IB(PCIE_REFCLK_N));
 
-   pcie_v5 pcie 
+   pcie_v5 pcie
      (
       .pci_exp_txp( PCIE_TX0_P ),
       .pci_exp_txn( PCIE_TX0_N ),
@@ -94,7 +94,7 @@ module xillybus(PCIE_TX0_P, PCIE_TX0_N, PCIE_RX0_P, PCIE_RX0_N, PCIE_REFCLK_P,
 
       .sys_clk(pcie_ref_clk),
       .sys_reset_n( PCIE_PERST_B_LS ),
-      
+
       .refclkout( ),
 
       .trn_clk(bus_clk),
