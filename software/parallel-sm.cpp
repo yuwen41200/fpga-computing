@@ -1,6 +1,6 @@
 /**
- * Sample Host Program
- * $ g++ -Wall -Wextra -Wpedantic -std=c++11 -pthread xillydemo-debug.cpp -o xillydemo-debug
+ * Sample Host Program w/ Datasize = Small
+ * $ g++ -Wall -Wextra -Wpedantic -std=c++11 -pthread parallel-sm.cpp -o parallel-sm
  */
 
 #include <iostream>
@@ -16,19 +16,15 @@ uint16_t frame1[256][256];
 
 void sender() {
 	int fd = initWrite();
-	for (int i = 0; i < 256; ++i) {
+	for (int i = 0; i < 256; ++i)
 		fpgaWrite(fd, (unsigned char*) frame0[i], 512);
-		// cout << "Row " << i << " in frame 0 has been sent." << endl;
-	}
 	fpgaFlush(fd);
 }
 
 void receiver() {
 	int fd = initRead();
-	for (int i = 0; i < 256; ++i) {
+	for (int i = 0; i < 256; ++i)
 		fpgaRead(fd, (unsigned char*) frame1[i], 512);
-		// cout << "Row " << i << " in frame 0 has been received." << endl;
-	}
 }
 
 int main() {

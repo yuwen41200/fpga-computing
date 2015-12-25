@@ -1,6 +1,6 @@
 /**
- * Serial Version Program
- * $ g++ -Wall -Wextra -Wpedantic -std=c++11 serialdemo-debug.cpp -o serialdemo-debug
+ * Serial Version Program w/ Datasize = Small
+ * $ g++ -Wall -Wextra -Wpedantic -std=c++11 serial-sm.cpp -o serial-sm
  */
 
 #include <iostream>
