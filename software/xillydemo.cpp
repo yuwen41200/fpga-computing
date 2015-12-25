@@ -43,9 +43,9 @@ int main() {
 	// Initialize 3 frames.
 	for (int i = 0; i < 1920; ++i) {
 		for (int j = 0; j < 1080; ++j) {
-			frame0[i][j] = 0;
-			frame1[i][j] = 127;
-			frame2[i][j] = 255;
+			frame0[i][j] = j;
+			frame1[i][j] = j;
+			frame2[i][j] = j;
 		}
 	}
 
