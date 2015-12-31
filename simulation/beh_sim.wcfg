@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="/home/yuwen41200/Documents/fpga-computing/simulation/xillydemo_tb_isim_beh.wdb" id="1" type="auto">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="xillydemo_tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="11" />
+   <wvobject fp_name="/xillydemo_tb/user_r_read_32_empty" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">user_r_read_32_empty</obj_property>
+      <obj_property name="ObjectShortName">user_r_read_32_empty</obj_property>
+   </wvobject>
+   <wvobject fp_name="/xillydemo_tb/user_r_read_32_data" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">user_r_read_32_data[31:0]</obj_property>
+      <obj_property name="ObjectShortName">user_r_read_32_data[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/xillydemo_tb/user_w_write_32_full" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">user_w_write_32_full</obj_property>
+      <obj_property name="ObjectShortName">user_w_write_32_full</obj_property>
+   </wvobject>
+   <wvobject fp_name="/xillydemo_tb/bus_clk" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">bus_clk</obj_property>
+      <obj_property name="ObjectShortName">bus_clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/xillydemo_tb/quiesce" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">quiesce</obj_property>
+      <obj_property name="ObjectShortName">quiesce</obj_property>
+   </wvobject>
+   <wvobject fp_name="/xillydemo_tb/user_r_read_32_rden" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">user_r_read_32_rden</obj_property>
+      <obj_property name="ObjectShortName">user_r_read_32_rden</obj_property>
+   </wvobject>
+   <wvobject fp_name="/xillydemo_tb/user_r_read_32_open" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">user_r_read_32_open</obj_property>
+      <obj_property name="ObjectShortName">user_r_read_32_open</obj_property>
+   </wvobject>
+   <wvobject fp_name="/xillydemo_tb/user_w_write_32_wren" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">user_w_write_32_wren</obj_property>
+      <obj_property name="ObjectShortName">user_w_write_32_wren</obj_property>
+   </wvobject>
+   <wvobject fp_name="/xillydemo_tb/user_w_write_32_data" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">user_w_write_32_data[31:0]</obj_property>
+      <obj_property name="ObjectShortName">user_w_write_32_data[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/xillydemo_tb/user_w_write_32_open" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">user_w_write_32_open</obj_property>
+      <obj_property name="ObjectShortName">user_w_write_32_open</obj_property>
+   </wvobject>
+   <wvobject fp_name="/xillydemo_tb/i" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">i[31:0]</obj_property>
+      <obj_property name="ObjectShortName">i[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+</wave_config>
