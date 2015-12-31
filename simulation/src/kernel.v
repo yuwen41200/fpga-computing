@@ -17,12 +17,12 @@ always @(posedge clk) begin
 		counter <= counter + 1;
 		out_valid <= 0;
 	end
-	else if (in_valid && counter < 1025) begin
-		result <= result;
+	else if (in_valid && counter < 17) begin
+		result <= result + 1;
 		counter <= counter + 1;
 		out_valid <= 0;
 	end
-	else if (in_valid && counter == 1025) begin
+	else if (in_valid && counter == 17) begin
 		out_valid <= 1;
 	end
 	else if (~in_valid) begin

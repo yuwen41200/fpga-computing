@@ -103,6 +103,7 @@ always @(posedge bus_clk) begin
 		curr_state <= IDLE_STATE;
 	else
 		curr_state <= next_state;
+	$display("curr_state = %d", curr_state);
 end
 
 always @(*) begin
@@ -168,6 +169,7 @@ always @(posedge bus_clk) begin
 			send_counter <= send_counter + 2;
 	else
 		send_counter <= 0;
+	$display("send_counter = %d, send_data = %d, send_enabled = %d", send_counter, send_data, send_enabled);
 end
 
 /**

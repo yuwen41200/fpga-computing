@@ -30,7 +30,7 @@ xillydemo uut (
 always #1 bus_clk = ~bus_clk;
 
 initial begin
-	bus_clk = 0;
+	bus_clk = 1;
 	quiesce = 1;
 	user_r_read_32_rden = 0;
 	user_r_read_32_open = 0;
@@ -44,10 +44,13 @@ initial begin
 	#10;
 	user_r_read_32_rden = 1;
 	user_w_write_32_wren = 1;
-	for (i = 0; i < 2048; i = i + 1) begin
-		user_w_write_32_data = i;
+	for (i = 0; i < 2048; i = i + 2) begin
+		user_w_write_32_data[15:0] = i;
+		user_w_write_32_data[31:16] = i + 1;
 		#2;
 	end
+	user_w_write_32_wren = 0;
+	#100;
 	$finish;
 end
 

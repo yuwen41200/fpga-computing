@@ -98,6 +98,7 @@ simulation/fuse.log
 simulation/fuse.xmsgs
 simulation/fuseRelaunch.cmd
 simulation/iseconfig/xillydemo.xreport
+simulation/iseconfig/xillysim.projectmgr
 simulation/isim.cmd
 simulation/isim.log
 simulation/isim/isim_usage_statistics.html
