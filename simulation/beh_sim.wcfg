@@ -10,7 +10,7 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="13" />
+   <WVObjectSize size="20" />
    <wvobject fp_name="/xillydemo_tb/quiesce" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">quiesce</obj_property>
       <obj_property name="ObjectShortName">quiesce</obj_property>
@@ -60,6 +60,21 @@
    <wvobject fp_name="/xillydemo_tb/i" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">i[31:0]</obj_property>
       <obj_property name="ObjectShortName">i[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/xillydemo_tb/uut/curr_state" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">curr_state[3:0]</obj_property>
+      <obj_property name="ObjectShortName">curr_state[3:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/xillydemo_tb/uut/recv_data" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">recv_data[31:0]</obj_property>
+      <obj_property name="ObjectShortName">recv_data[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/xillydemo_tb/uut/recv_counter" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">recv_counter[8:0]</obj_property>
+      <obj_property name="ObjectShortName">recv_counter[8:0]</obj_property>
       <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/xillydemo_tb/uut/in_data" type="array" db_ref_id="1">
@@ -1347,6 +1362,11 @@
          <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
       </wvobject>
    </wvobject>
+   <wvobject fp_name="/xillydemo_tb/uut/in_valid" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">in_valid[0:255]</obj_property>
+      <obj_property name="ObjectShortName">in_valid[0:255]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
    <wvobject fp_name="/xillydemo_tb/uut/out_data" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">out_data[0:255,15:0]</obj_property>
       <obj_property name="ObjectShortName">out_data[0:255,15:0]</obj_property>
@@ -2631,5 +2651,20 @@
          <obj_property name="ObjectShortName">out_data[255,15:0]</obj_property>
          <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
       </wvobject>
+   </wvobject>
+   <wvobject fp_name="/xillydemo_tb/uut/out_valid" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">out_valid[0:255]</obj_property>
+      <obj_property name="ObjectShortName">out_valid[0:255]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/xillydemo_tb/uut/send_data" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">send_data[31:0]</obj_property>
+      <obj_property name="ObjectShortName">send_data[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/xillydemo_tb/uut/send_counter" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">send_counter[8:0]</obj_property>
+      <obj_property name="ObjectShortName">send_counter[8:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
 </wave_config>

@@ -117,6 +117,7 @@ simulation/isim/xillydemo_tb_isim_beh.exe.sim/
 simulation/src/_xmsgs/cg.xmsgs
 simulation/src/_xmsgs/pn_parser.xmsgs
 simulation/src/coregen.log
+simulation/src/edit_fifo_32x512.tcl
 simulation/src/fifo_32x512.asy
 simulation/src/fifo_32x512.gise
 simulation/src/fifo_32x512.ngc
