@@ -12,7 +12,9 @@ reg user_w_write_32_open;
 wire user_r_read_32_empty;
 wire [31:0] user_r_read_32_data;
 wire user_w_write_32_full;
-integer i;
+integer tb_input;
+integer tb_output_0;
+integer tb_output_1;
 
 xillydemo uut (
 	.bus_clk(bus_clk), 
@@ -26,6 +28,9 @@ xillydemo uut (
 	.user_w_write_32_data(user_w_write_32_data), 
 	.user_w_write_32_open(user_w_write_32_open)
 );
+
+assign tb_output_0 = user_r_read_32_data[15:0];
+assign tb_output_1 = user_r_read_32_data[31:16];
 
 always #1 bus_clk = ~bus_clk;
 
@@ -44,13 +49,13 @@ initial begin
 	#10;
 	user_r_read_32_rden = 1;
 	user_w_write_32_wren = 1;
-	for (i = 0; i < 2048; i = i + 2) begin
-		user_w_write_32_data[15:0] = i;
-		user_w_write_32_data[31:16] = i + 1;
+	for (tb_input = 0; tb_input < 2048; tb_input = tb_input + 2) begin
+		user_w_write_32_data[15:0] = tb_input;
+		user_w_write_32_data[31:16] = tb_input + 1;
 		#2;
 	end
 	user_w_write_32_wren = 0;
-	#100;
+	#200;
 	$finish;
 end
 
