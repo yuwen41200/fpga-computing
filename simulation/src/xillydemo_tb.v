@@ -49,13 +49,19 @@ initial begin
 	#10;
 	user_r_read_32_rden = 1;
 	user_w_write_32_wren = 1;
-	for (tb_input = 0; tb_input < 1024+6; tb_input = tb_input + 2) begin
+	for (tb_input = 0; tb_input < 1024; tb_input = tb_input + 2) begin
 		user_w_write_32_data[15:0] = tb_input;
 		user_w_write_32_data[31:16] = tb_input + 1;
 		#2;
 	end
 	user_w_write_32_wren = 0;
+	user_w_write_32_data = 0;
 	#1250;
+	quiesce = 1;
+	user_r_read_32_rden = 0;
+	user_r_read_32_open = 0;
+	user_w_write_32_open = 0;
+	#10;
 	$finish;
 end
 
