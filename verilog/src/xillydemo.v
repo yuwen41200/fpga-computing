@@ -66,18 +66,20 @@ wire exec_done;
  * Receiving State Signals
  */
 
-reg  [8:0]  recv_counter;
+reg  [7:0]  recv_counter;
 wire        recv_enabled;
 wire [31:0] recv_data;
 wire        recv_valid;
 
 integer iterator;
 
+reg first_recv;
+
 /**
  * Sending State Signals
  */
 
-reg  [8:0]  send_counter;
+reg  [7:0]  send_counter;
 wire        send_enabled;
 wire [31:0] send_data;
 wire        send_full;
@@ -86,7 +88,7 @@ wire        send_full;
  * Executing State Signals
  */
 
-parameter [9:0] THREAD_NUMBER = 256;
+parameter [8:0] THREAD_NUMBER = 256;
 
 reg  [15:0] in_data   [0:THREAD_NUMBER-1];
 reg         in_valid  [0:THREAD_NUMBER-1];
@@ -219,6 +221,10 @@ assign recv_enabled = (curr_state == RECV_STATE) ? 1 : 0;
 
 always @(posedge bus_clk) begin
 	if (curr_state == RECV_STATE) begin
+		if (recv_counter >= 2) begin
+			in_valid[0] <= 1;
+			in_valid[1] <= 1;
+		end
 		if (recv_valid) begin
 			in_data[recv_counter]    <= recv_data[15:0];
 			in_data[recv_counter+1]  <= recv_data[31:16];
@@ -231,8 +237,22 @@ always @(posedge bus_clk) begin
 		for (iterator = 0; iterator < THREAD_NUMBER; iterator = iterator + 1) begin
 			in_valid[iterator] <= 0;
 		end
-		recv_counter <= 0;
+		if (first_recv) begin
+			recv_counter <= 0;
+		end
+		else begin
+			in_data[0] <= recv_data[15:0];
+			in_data[1] <= recv_data[31:16];
+			recv_counter <= 2;
+		end
 	end
+end
+
+always @(posedge bus_clk) begin
+	if (quiesce || ~user_w_write_32_open || ~user_r_read_32_open)
+		first_recv <= 1;
+	else if (curr_state == RECV_STATE)
+		first_recv <= 0;
 end
 
 /**
@@ -244,11 +264,14 @@ assign send_data[15:0]  = out_data[send_counter];
 assign send_data[31:16] = out_data[send_counter+1];
 
 always @(posedge bus_clk) begin
-	if (curr_state == SEND_STATE)
-		if (~send_full)
+	if (curr_state == SEND_STATE) begin
+		if (~send_full) begin
 			send_counter <= send_counter + 2;
-	else
+		end
+	end
+	else if (curr_state == IDLE_STATE) begin
 		send_counter <= 0;
+	end
 end
 
 /**
