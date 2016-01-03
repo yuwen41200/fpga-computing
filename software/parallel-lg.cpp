@@ -26,7 +26,7 @@ void sender() {
 		fpgaWrite(fd, (unsigned char*) frame1[i], 2160);
 	for (int i = 0; i < 1920; ++i)
 		fpgaWrite(fd, (unsigned char*) frame2[i], 2160);
-	fpgaFlush(fd);
+	//fpgaFlush(fd);
 }
 
 void receiver() {
