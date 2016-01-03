@@ -63,6 +63,8 @@ verilog/xillydemo_xst.xrpt
 verilog/xlnx_auto_0_xdb/
 verilog/_xmsgs/
 verilog/xst/
+verilog/src/coregen.cgc
+verilog/src/coregen.cgp
 verilog/src/coregen.log
 verilog/src/fifo_32x512.asy
 verilog/src/fifo_32x512_flist.txt

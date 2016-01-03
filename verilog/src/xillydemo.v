@@ -221,11 +221,11 @@ assign recv_enabled = (curr_state == RECV_STATE) ? 1 : 0;
 
 always @(posedge bus_clk) begin
 	if (curr_state == RECV_STATE) begin
-		if (recv_counter >= 2) begin
-			in_valid[0] <= 1;
-			in_valid[1] <= 1;
-		end
 		if (recv_valid) begin
+			if (recv_counter >= 2) begin
+				in_valid[0] <= 1;
+				in_valid[1] <= 1;
+			end
 			in_data[recv_counter]    <= recv_data[15:0];
 			in_data[recv_counter+1]  <= recv_data[31:16];
 			in_valid[recv_counter]   <= 1;
@@ -249,10 +249,12 @@ always @(posedge bus_clk) begin
 end
 
 always @(posedge bus_clk) begin
-	if (quiesce || ~user_w_write_32_open || ~user_r_read_32_open)
+	if (quiesce || ~user_w_write_32_open || ~user_r_read_32_open) begin
 		first_recv <= 1;
-	else if (curr_state == RECV_STATE)
+	end
+	else if (curr_state == RECV_STATE) begin
 		first_recv <= 0;
+	end
 end
 
 /**
