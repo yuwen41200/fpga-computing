@@ -48,14 +48,20 @@ int main() {
 	timer = clock() - timer;
 
 	// Output results.
-	cout << "Some results from frame 0: " << frame0[0][0] << " "
-	     << frame0[959][539] << " " << frame0[1919][1079] << endl;
-	cout << "Some results from frame 1: " << frame1[0][0] << " "
-	     << frame1[959][539] << " " << frame1[1919][1079] << endl;
-	cout << "Some results from frame 2: " << frame2[0][0] << " "
-	     << frame2[959][539] << " " << frame2[1919][1079] << endl;
+	cout << endl << "Results from frame 0: " << endl;
+	for (int i = 0; i < 1920; ++i)
+		for (int j = 0; j < 1080; ++j)
+			cout << frame0[i][j] << " ";
+	cout << endl << "Results from frame 1: " << endl;
+	for (int i = 0; i < 1920; ++i)
+		for (int j = 0; j < 1080; ++j)
+			cout << frame1[i][j] << " ";
+	cout << endl << "Results from frame 2: " << endl;
+	for (int i = 0; i < 1920; ++i)
+		for (int j = 0; j < 1080; ++j)
+			cout << frame2[i][j] << " ";
 
 	// End of the program.
-	cout << "Time elapsed: " << (float) timer / CLOCKS_PER_SEC << endl;
+	cout << endl << "Time elapsed: " << (float) timer / CLOCKS_PER_SEC << endl;
 	return 0;
 }

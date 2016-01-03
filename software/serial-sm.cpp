@@ -30,8 +30,8 @@ int main() {
 	timer = clock() - timer;
 
 	// Output results.
-	cout << "Results from frame 0: " << endl;
-	for (int i = 0; i < 2; ++i)
+	cout << endl << "Results from frame 0: " << endl;
+	for (int i = 0; i < 256; ++i)
 		for (int j = 0; j < 256; ++j)
 			cout << frame0[i][j] << " ";
 

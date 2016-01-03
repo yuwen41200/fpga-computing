@@ -1,4 +1,0 @@
-Some results from frame 0: 0 0 0
-Some results from frame 1: 1752 1752 1752
-Some results from frame 2: 7581 7581 7581
-Time elapsed: 15.7502

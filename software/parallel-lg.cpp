@@ -1,5 +1,5 @@
 /**
- * Sample Host Program w/ Datasize = Large
+ * Parallel Version Program w/ Datasize = Large
  * $ g++ -Wall -Wextra -Wpedantic -std=c++11 -pthread parallel-lg.cpp -o parallel-lg
  */
 
@@ -26,7 +26,6 @@ void sender() {
 		fpgaWrite(fd, (unsigned char*) frame1[i], 2160);
 	for (int i = 0; i < 1920; ++i)
 		fpgaWrite(fd, (unsigned char*) frame2[i], 2160);
-	//fpgaFlush(fd);
 }
 
 void receiver() {
@@ -60,14 +59,20 @@ int main() {
 	timer = clock() - timer;
 
 	// Output results.
-	cout << "Some results from frame 0: " << frame3[0][0] << " "
-	     << frame3[959][539] << " " << frame3[1919][1079] << endl;
-	cout << "Some results from frame 1: " << frame4[0][0] << " "
-	     << frame4[959][539] << " " << frame4[1919][1079] << endl;
-	cout << "Some results from frame 2: " << frame5[0][0] << " "
-	     << frame5[959][539] << " " << frame5[1919][1079] << endl;
+	cout << endl << "Results from frame 0: " << endl;
+	for (int i = 0; i < 1920; ++i)
+		for (int j = 0; j < 1080; ++j)
+			cout << frame3[i][j] << " ";
+	cout << endl << "Results from frame 1: " << endl;
+	for (int i = 0; i < 1920; ++i)
+		for (int j = 0; j < 1080; ++j)
+			cout << frame4[i][j] << " ";
+	cout << endl << "Results from frame 2: " << endl;
+	for (int i = 0; i < 1920; ++i)
+		for (int j = 0; j < 1080; ++j)
+			cout << frame5[i][j] << " ";
 
 	// End of the program.
-	cout << "Time elapsed: " << (float) timer / CLOCKS_PER_SEC << endl;
+	cout << endl << "Time elapsed: " << (float) timer / CLOCKS_PER_SEC << endl;
 	return 0;
 }
