@@ -1,6 +1,7 @@
 # FPGA Computing #
 
-Research Project on FPGA Parallel Heterogeneous Computing
+Research Project on FPGA Parallel Heterogeneous Computing  
+https://github.com/yuwen41200/fpga-computing/raw/master/docs/final.pdf
 
 This is a subproject of [sunset1995/parallel_analysis](https://github.com/sunset1995/parallel_analysis).
 
