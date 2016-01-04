@@ -20,11 +20,12 @@ The RTL design is done with Xilinx ISE Design Suite 14.7.
 | Data Size          | Serial<br>(Singlethread) | CPU Multithreading<br>(OpenMP) | GPGPU Accelerator<br>(CUDA) | FPGA Accelerator |
 |:------------------:|-------------------------:|-------------------------------:|----------------------------:|-----------------:|
 | Small<br>(128 KiB) | 0.179096 s               | 0.067667 s                     | 0.891333 s                  | 0.000534 s       |
-| _Speedup_          | **1.000 x**              | **2.647 x**                    |                             | **335.386 x**    |
+| _Speedup_          | **1.000 x**              | **2.647 x**                    | **0.201 x**                 | **335.386 x**    |
 | Large<br>(~12 MiB) | 15.873200 s              | 4.678667 s                     |                             | 0.016104 s       |
 | _Speedup_          | **1.000 x**              | **3.393 x**                    |                             | **985.668 x**    |
 
-Platform Specification:
+## Platform Specification ##
+
 + Serial: Intel Core i5-3570 CPU @ 3.40GHz x 4/4, 8 GB Memory, Ubuntu 14.04 64-bit
 + CPU: Intel Core i5-3570 CPU @ 3.40GHz x 4/4, 8 GB Memory, Ubuntu 14.04 64-bit, using up to 4 threads
 + GPGPU: Intel Core i7-3770 CPU @ 3.40Ghz x 4/8, 16 GB Memory, Windows 10 64-bit, NVIDIA GeForce GTX 670
