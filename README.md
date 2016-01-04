@@ -20,6 +20,6 @@ The RTL design is done with Xilinx ISE Design Suite 14.7.
 | Data Size | Serial (Singlethread) | CPU Multithreading | GPGPU Accelerator (CUDA) | FPGA Accelerator |
 |:---------:|----------------------:|-------------------:|-------------------------:|-----------------:|
 | Small     | 0.179096 s            |                    |                          | 0.000534 s       |
-| _Speedup_ | *1.000 x*             |                    |                          | *335.386 x*      |
+| _Speedup_ | **1.000 x**           |                    |                          | **335.386 x**    |
 | Large     | 15.873200 s           |                    |                          | 0.016104 s       |
-| _Speedup_ | *1.000 x*             |                    |                          | *983.116 x*      |
+| _Speedup_ | **1.000 x**           |                    |                          | **985.668 x**    |
