@@ -26,6 +26,6 @@ The RTL design is done with Xilinx ISE Design Suite 14.7.
 
 Platform Specification:
 + Serial: Intel Core i5-3570 CPU @ 3.40GHz x 4/4, 8 GB Memory, Ubuntu 14.04 LTS 64-bit
-+ CPU Multithreading: Intel Core i5-3570 CPU @ 3.40GHz x 4/4, 8 GB Memory, Ubuntu 14.04 LTS 64-bit, using up to 4 threads
-+ GPGPU Accelerator: Intel Core i7-3770 CPU @ 3.40Ghz x 4/8, 16 GB Memory, Windows 10 Enterprise 64-bit, NVIDIA GeForce GTX 670
-+ FPGA Accelerator: Intel Core i5-3570 CPU @ 3.40GHz x 4/4, 8 GB Memory, Ubuntu 14.04 LTS 64-bit, Xilinx Virtex-5 ML506 Evaluation Platform
++ CPU: Intel Core i5-3570 CPU @ 3.40GHz x 4/4, 8 GB Memory, Ubuntu 14.04 LTS 64-bit, using up to 4 threads
++ GPGPU: Intel Core i7-3770 CPU @ 3.40Ghz x 4/8, 16 GB Memory, Windows 10 Enterprise 64-bit, NVIDIA GeForce GTX 670
++ FPGA: Intel Core i5-3570 CPU @ 3.40GHz x 4/4, 8 GB Memory, Ubuntu 14.04 LTS 64-bit, Xilinx Virtex-5 ML506 Evaluation Platform
