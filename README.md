@@ -17,19 +17,15 @@ The RTL design is done with Xilinx ISE Design Suite 14.7.
 
 ## Results ##
 
-| Data Size       | Serial (Singlethread) | CPU Multithreading (OpenMP) | GPGPU Accelerator (CUDA) | FPGA Accelerator |
-|:---------------:|----------------------:|----------------------------:|-------------------------:|-----------------:|
-| Small (128 KiB) | 0.179096 s            | 0.067667 s                  | 0.770 s                  | 0.000534 s       |
-| _Speedup_       | **1.000 x**           | **2.647 x**                 |                          | **335.386 x**    |
-| Large (~12 MiB) | 15.873200 s           | 4.678667 s                  |                          | 0.016104 s       |
-| _Speedup_       | **1.000 x**           | **3.393 x**                 |                          | **985.668 x**    |
+| Data Size          | Serial<br>(Singlethread) | CPU Multithreading<br>(OpenMP) | GPGPU Accelerator<br>(CUDA) | FPGA Accelerator |
+|:------------------:|-------------------------:|-------------------------------:|----------------------------:|-----------------:|
+| Small<br>(128 KiB) | 0.179096 s               | 0.067667 s                     | 0.770 s                     | 0.000534 s       |
+| _Speedup_          | **1.000 x**              | **2.647 x**                    |                             | **335.386 x**    |
+| Large<br>(~12 MiB) | 15.873200 s              | 4.678667 s                     |                             | 0.016104 s       |
+| _Speedup_          | **1.000 x**              | **3.393 x**                    |                             | **985.668 x**    |
 
 Platform Specification:
-+ Serial: Intel Core i5-3570 CPU @ 3.40GHz x 4/4, 8 GB Memory,  
-Ubuntu 14.04 LTS 64-bit
-+ CPU Multithreading: Intel Core i5-3570 CPU @ 3.40GHz x 4/4, 8 GB Memory,  
-Ubuntu 14.04 LTS 64-bit, using up to 4 threads
-+ GPGPU Accelerator: Intel Core i7-3770 CPU @ 3.40Ghz x 4/8, 16 GB Memory,  
-Windows 10 Enterprise 64-bit, NVIDIA GeForce GTX 670
-+ FPGA Accelerator: Intel Core i5-3570 CPU @ 3.40GHz x 4/4, 8 GB Memory,  
-Ubuntu 14.04 LTS 64-bit, Xilinx Virtex-5 ML506 Evaluation Platform
++ Serial: Intel Core i5-3570 CPU @ 3.40GHz x 4/4, 8 GB Memory, Ubuntu 14.04 LTS 64-bit
++ CPU Multithreading: Intel Core i5-3570 CPU @ 3.40GHz x 4/4, 8 GB Memory, Ubuntu 14.04 LTS 64-bit, using up to 4 threads
++ GPGPU Accelerator: Intel Core i7-3770 CPU @ 3.40Ghz x 4/8, 16 GB Memory, Windows 10 Enterprise 64-bit, NVIDIA GeForce GTX 670
++ FPGA Accelerator: Intel Core i5-3570 CPU @ 3.40GHz x 4/4, 8 GB Memory, Ubuntu 14.04 LTS 64-bit, Xilinx Virtex-5 ML506 Evaluation Platform
