@@ -8,7 +8,7 @@ FPGA is the abbreviation for _field programmable gate array_. We consider FPGAs 
 The performance of the circuit is highly dependent on the quality of the circuit design and the available resources on the FPGA development board. Though some EDA (electronic design automation) tools, like Xilinx SDAccel, support high-level synthesis that can convert OpenCL C/C++ codes into schematics, these techniques are not mature enough, and may lead to poor performance.
 
 ## 3.3. Proposed Implementation ##
-We employ RTL (register-transfer level) design by the Verilog HDL (hardware description language), and we use the Xillybus IP core [2] for data transmission over the PCIe interface. Our targeted board is Xilinx Virtex-5 ML506 Evaluation Platform (with XC5VSX50T FPGA). We use C++ for software design. The host programs run on 64-bit Linux distributions.
+We employ RTL (register-transfer level) design by the Verilog HDL (hardware description language), and we use the Xillybus IP core [2] for data transmission over the PCIe interface. Our targeted board is Xilinx Virtex-5 ML506 Evaluation Platform (w/ XC5VSX50T FPGA). We use C++ for software design. The host programs run on 64-bit Linux distributions.
 
 ![img-demo1][img-demo1]  
 ![img-demo2][img-demo2]
