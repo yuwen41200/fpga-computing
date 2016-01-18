@@ -1,8 +1,8 @@
 ## 3. Feasibility Study: FPGA Parallel Heterogeneous Computing ##
-https://github.com/yuwen41200/fpga-computing
+All source codes for this section are available on [https://github.com/yuwen41200/fpga-computing].
 
 ## 3.1. Why FPGAs ? ##
-FPGA is the abbreviation for "field programmable gate array." We consider FPGAs a suitable choice for heterogeneous computing because FPGAs are essentially massively parallel processors. Furthermore, fully customized hardware design can lead to maximized optimization. Past research has also showed that using FPGAs as accelerators can realize better performance than using GPGPUs. If the data transmission interface is also PCIe, then the cost is almost the same as GPGPUs.
+FPGA is the abbreviation for _field programmable gate array_. We consider FPGAs a suitable choice for heterogeneous computing because FPGAs are essentially massively parallel processors. Furthermore, fully customized hardware design can lead to maximized optimization. Past research has also showed that using FPGAs as accelerators can realize better performance than using GPGPUs. If the data transmission interface is also PCIe, then the cost is almost the same as GPGPUs.
 
 ## 3.2. Drawbacks ##
 The performance of the circuit is highly dependent on the quality of the circuit design and the available resources on the FPGA development board. Though some EDA (electronic design automation) tools, like Xilinx SDAccel, support high-level synthesis that can convert OpenCL C/C++ codes into schematics, these techniques are not mature enough, and may lead to poor performance.
@@ -15,7 +15,7 @@ The PC-end (host) is on the left side, whereas the FPGA-end (device) is on the r
 ![img-demo0][img-demo0]
 
 ## 3.5. Problem Statement ##
-color &#x000D7; 1.125 ^ 1024
+We want to evaluate `color × 1.125 ^ 1024`.
 
 ## 3.6. Kernel Instantiation ##
 
@@ -45,6 +45,8 @@ color &#x000D7; 1.125 ^ 1024
 Special thanks to Chun-Jen Tsai, associate professor at Dept. of C.S., National Chiao Tung University, Taiwan. Prof. Tsai not only lent me experiment equipment, but gave me some advice on this topic.
 
 ## 10. References ##
-[2] Xillybus Ltd. (2016). _An FPGA IP Core for Easy DMA over PCIe with Windows and Linux_ [Online]. Available: http://xillybus.com/
+[2] Xillybus Ltd. (2016). _An FPGA IP Core for Easy DMA over PCIe with Windows and Linux_ [Online]. Available: [http://xillybus.com/]
 
+[https://github.com/yuwen41200/fpga-computing]: https://github.com/yuwen41200/fpga-computing
 [img-demo0]: https://github.com/yuwen41200/fpga-computing/raw/master/docs/demo0.png
+[http://xillybus.com/]: http://xillybus.com/
