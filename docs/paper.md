@@ -8,25 +8,26 @@ FPGA is the abbreviation for "field programmable gate array." We consider FPGAs 
 The performance of the circuit is highly dependent on the quality of the circuit design and the available resources on the FPGA development board. Though some EDA (electronic design automation) tools, like Xilinx SDAccel, support high-level synthesis that can convert OpenCL C/C++ codes into schematics, these techniques are not mature enough, and may lead to poor performance.
 
 ## 3.3. Proposed Implementation ##
-• Employ RTL (register-transfer level) design by the
-Verilog HDL (hardware description language)
-• Use the Xillybus IP core for data transmission over
-the PCIe interface
-• Targeted board: Xilinx Virtex-5 ML506 Evaluation
-Platform
+We employ RTL (register-transfer level) design by the Verilog HDL (hardware description language), and we use the Xillybus IP core for data transmission over the PCIe interface. Our targeted board is Xilinx Virtex-5 ML506 Evaluation Platform. We use C++ for software design. The host programs run on 64-bit Linux distributions.
 
-• Use C++ for software design
-• The host programs run on 64-bit Linux distributions
+## 3.4. Computation Platform ##
 
-## PC ##
+The PC-end (host) is on the left side, whereas the FPGA-end (device) is on the right side.
 
-FPGA
+![img-demo0][img-demo0]
 
-## Problem Statement ##
-color 1.1251024
+## 3.5. Problem Statement ##
 
-← Hardware Version
-↓ Software Version
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<mrow>
+	<mi>color</mi>
+	<mo>&#x000D7;</mo>
+	<msup>
+		<mn>1.125</mn>
+		<mn>1024</mn>
+	</msup>
+</mrow>
+</math>
 
 ## Kernel Instantiation ##
 
@@ -108,3 +109,5 @@ Speedup
 ## Attribution ##
 Special thanks to Chun-Jen Tsai,
 assistant professor at Dept. of C.S., NCTU
+
+[img-demo0]: https://github.com/yuwen41200/fpga-computing/raw/master/docs/demo0.jpg
