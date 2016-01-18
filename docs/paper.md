@@ -18,16 +18,7 @@ The PC-end (host) is on the left side, whereas the FPGA-end (device) is on the r
 
 ## 3.5. Problem Statement ##
 
-<math xmlns="http://www.w3.org/1998/Math/MathML">
-<mrow>
-	<mi>color</mi>
-	<mo>&#x000D7;</mo>
-	<msup>
-		<mn>1.125</mn>
-		<mn>1024</mn>
-	</msup>
-</mrow>
-</math>
+color &#x000D7; 1.125 ^ 1024
 
 ## Kernel Instantiation ##
 
@@ -110,4 +101,4 @@ Speedup
 Special thanks to Chun-Jen Tsai,
 assistant professor at Dept. of C.S., NCTU
 
-[img-demo0]: https://github.com/yuwen41200/fpga-computing/raw/master/docs/demo0.jpg
+[img-demo0]: https://github.com/yuwen41200/fpga-computing/raw/master/docs/demo0.png
