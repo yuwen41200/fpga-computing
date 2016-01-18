@@ -1,24 +1,13 @@
-# 3. Feasibility Study: FPGA Parallel Heterogeneous Computing #
+## 3. Feasibility Study: FPGA Parallel Heterogeneous Computing ##
 https://github.com/yuwen41200/fpga-computing
 
 ## 3.1. Why FPGAs ? ##
-FPGA is the abbreviation for "field programmable gate array." We consider FPGAs a suitable choice for heterogeneous computing because FPGAs are essentially massively parallel processors. Furthermore, fully customized hardware design can lead to maximized optimization. Past research has also showed that using FPGAs as accelerators can realize better performance than
-using GPGPUs. If the data transmission interface is also PCIe, then the cost is almost the same as GPGPUs.
+FPGA is the abbreviation for "field programmable gate array." We consider FPGAs a suitable choice for heterogeneous computing because FPGAs are essentially massively parallel processors. Furthermore, fully customized hardware design can lead to maximized optimization. Past research has also showed that using FPGAs as accelerators can realize better performance than using GPGPUs. If the data transmission interface is also PCIe, then the cost is almost the same as GPGPUs.
 
-# Drawbacks
-• Circuit design is hard, especially for experienced
-software developers
-• The performance of the circuit is highly
-dependent on the quality of the circuit design
-and the available resources on the FPGA
-development board
-• Though some EDA (electronic design automation)
-tools, like Xilinx SDAccel, support high-level
-synthesis that can convert OpenCL C/C++ codes
-into schematics, these techniques are not mature
-yet, and may lead to poor performance
+## 3.2. Drawbacks ##
+The performance of the circuit is highly dependent on the quality of the circuit design and the available resources on the FPGA development board. Though some EDA (electronic design automation) tools, like Xilinx SDAccel, support high-level synthesis that can convert OpenCL C/C++ codes into schematics, these techniques are not mature enough, and may lead to poor performance.
 
-# Proposed Implementation
+## 3.3. Proposed Implementation ##
 • Employ RTL (register-transfer level) design by the
 Verilog HDL (hardware description language)
 • Use the Xillybus IP core for data transmission over
@@ -29,25 +18,25 @@ Platform
 • Use C++ for software design
 • The host programs run on 64-bit Linux distributions
 
-# PC
+## PC ##
 
 FPGA
 
-# Problem Statement
+## Problem Statement ##
 color 1.1251024
 
 ← Hardware Version
 ↓ Software Version
 
-# Kernel Instantiation
+## Kernel Instantiation ##
 
-# FSM (Finite-State Machine)
+## FSM (Finite-State Machine) ##
 
-# Data Interface
+## Data Interface ##
 
-# Multithreading on Software
+## Multithreading on Software ##
 
-# Platform Specification
+## Platform Specification ##
 • Serial: Intel Core i5-3570 CPU @ 3.40GHz 4C4T,
 8 GB Memory, Ubuntu 14.04 LTS 64-bit
 • CPU: Intel Core i5-3570 CPU @ 3.40GHz 4C4T,
@@ -60,7 +49,7 @@ NVIDIA GeForce GTX 670
 8 GB Memory, Ubuntu 14.04 LTS 64-bit,
 Xilinx Virtex-5 ML506 Evaluation Platform
 
-# Results
+## Results ##
 Data Size
 
 Serial
@@ -116,6 +105,6 @@ Speedup
 
 985.668 x
 
-# Attribution
+## Attribution ##
 Special thanks to Chun-Jen Tsai,
 assistant professor at Dept. of C.S., NCTU
