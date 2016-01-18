@@ -37,12 +37,14 @@ color &#x000D7; 1.125 ^ 1024
 | Platform | Detailed Description |
 |:----:|:-----|
 | Serial<br>(Singlethread) | Intel Core i5-3570 CPU @ 3.40GHz 4C4T, 8 GB Memory, Ubuntu 14.04 LTS 64-bit |
-| CPU Multithreading<br>(OpenMP) | Intel Core i5-3570 CPU @ 3.40GHz 4C4T, 8 GB Memory, Ubuntu 14.04 LTS 64-bit, using up to 4 threads |
-| GPGPU Accelerator<br>(CUDA) | Intel Core i7-3770 CPU @ 3.40Ghz 4C8T, 16 GB Memory, Windows 10 Enterprise 64-bit, NVIDIA GeForce GTX 670 |
-| FPGA Accelerator | Intel Core i5-3570 CPU @ 3.40GHz 4C4T, 8 GB Memory, Ubuntu 14.04 LTS 64-bit, Xilinx Virtex-5 ML506 Evaluation Platform |
+| CPU Multithreading<br>(OpenMP) | Intel Core i5-3570 CPU @ 3.40GHz 4C4T, 8 GB Memory, Ubuntu 14.04 LTS 64-bit,<br>using up to 4 threads |
+| GPGPU Accelerator<br>(CUDA) | Intel Core i7-3770 CPU @ 3.40Ghz 4C8T, 16 GB Memory, Windows 10 Enterprise 64-bit,<br>NVIDIA GeForce GTX 670 |
+| FPGA Accelerator | Intel Core i5-3570 CPU @ 3.40GHz 4C4T, 8 GB Memory, Ubuntu 14.04 LTS 64-bit,<br>Xilinx Virtex-5 ML506 Evaluation Platform |
 
-## Attribution ##
+## 9. Attribution ##
 Special thanks to Chun-Jen Tsai,
 assistant professor at Dept. of C.S., NCTU
+
+## 10. References ##
 
 [img-demo0]: https://github.com/yuwen41200/fpga-computing/raw/master/docs/demo0.png
