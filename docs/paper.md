@@ -9,11 +9,13 @@ The performance of the circuit is highly dependent on the quality of the circuit
 
 ## 3.3. Proposed Implementation ##
 We employ RTL (register-transfer level) design by the Verilog HDL (hardware description language), and we use the Xillybus IP core [2] for data transmission over the PCIe interface. Our targeted board is Xilinx Virtex-5 ML506 Evaluation Platform. We use C++ for software design. The host programs run on 64-bit Linux distributions.
-![img-demo1][img-demo1]
+
+![img-demo1][img-demo1]  
 ![img-demo2][img-demo2]
 
 ## 3.4. Computation Platform ##
 The PC-end (host) is on the left side, whereas the FPGA-end (device) is on the right side.
+
 ![img-demo0][img-demo0]
 
 ## 3.5. Problem Statement ##
@@ -24,6 +26,7 @@ We use a _generate block_ to instantiate 256 kernel modules, namely, 256 simulta
 
 ## 3.7. FSM (Finite-State Machine) ##
 There are 4 states: `IDLE_STATE`, `RECV_STATE`, `EXEC_STATE`, and `SEND_STATE`. After the program starts, the circuit goes to the second state. The second state waits and receives 256 color values, until then, it goes to the third state. The third state processes the 256 received values in parallel, then it goes to the last state. The last state waits and sends 256 new values back, and goes to the first state again.
+
 ![img-demo3][img-demo3]
 
 ## 3.8. Data Interface ##
