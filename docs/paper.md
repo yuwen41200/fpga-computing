@@ -8,7 +8,7 @@ FPGA is the abbreviation for "field programmable gate array." We consider FPGAs 
 The performance of the circuit is highly dependent on the quality of the circuit design and the available resources on the FPGA development board. Though some EDA (electronic design automation) tools, like Xilinx SDAccel, support high-level synthesis that can convert OpenCL C/C++ codes into schematics, these techniques are not mature enough, and may lead to poor performance.
 
 ## 3.3. Proposed Implementation ##
-We employ RTL (register-transfer level) design by the Verilog HDL (hardware description language), and we use the Xillybus IP core for data transmission over the PCIe interface. Our targeted board is Xilinx Virtex-5 ML506 Evaluation Platform. We use C++ for software design. The host programs run on 64-bit Linux distributions.
+We employ RTL (register-transfer level) design by the Verilog HDL (hardware description language), and we use the Xillybus IP core [2] for data transmission over the PCIe interface. Our targeted board is Xilinx Virtex-5 ML506 Evaluation Platform. We use C++ for software design. The host programs run on 64-bit Linux distributions.
 
 ## 3.4. Computation Platform ##
 The PC-end (host) is on the left side, whereas the FPGA-end (device) is on the right side.
@@ -35,16 +35,16 @@ color &#x000D7; 1.125 ^ 1024
 
 ## 3.11. Platform Specification ##
 | Platform | Detailed Description |
-|:----:|:-----|
+|-----:|:-----|
 | Serial<br>(Singlethread) | Intel Core i5-3570 CPU @ 3.40GHz 4C4T, 8 GB Memory, Ubuntu 14.04 LTS 64-bit |
 | CPU Multithreading<br>(OpenMP) | Intel Core i5-3570 CPU @ 3.40GHz 4C4T, 8 GB Memory, Ubuntu 14.04 LTS 64-bit,<br>using up to 4 threads |
 | GPGPU Accelerator<br>(CUDA) | Intel Core i7-3770 CPU @ 3.40Ghz 4C8T, 16 GB Memory, Windows 10 Enterprise 64-bit,<br>NVIDIA GeForce GTX 670 |
 | FPGA Accelerator | Intel Core i5-3570 CPU @ 3.40GHz 4C4T, 8 GB Memory, Ubuntu 14.04 LTS 64-bit,<br>Xilinx Virtex-5 ML506 Evaluation Platform |
 
-## 9. Attribution ##
-Special thanks to Chun-Jen Tsai,
-assistant professor at Dept. of C.S., NCTU
+## 9. Endnote ##
+Special thanks to Chun-Jen Tsai, associate professor at Dept. of C.S., N.C.T.U., Taiwan. Prof. Tsai not only lent me experiment equipment, but gave me some advice on this topic.
 
 ## 10. References ##
+[2] Xillybus Ltd. (2016). _An FPGA IP Core for Easy DMA over PCIe with Windows and Linux_ [Online]. Available: http://xillybus.com/
 
 [img-demo0]: https://github.com/yuwen41200/fpga-computing/raw/master/docs/demo0.png
