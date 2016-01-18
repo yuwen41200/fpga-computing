@@ -18,8 +18,10 @@ The PC-end (host) is on the left side, whereas the FPGA-end (device) is on the r
 We want to evaluate `color × 1.125 ^ 1024`.
 
 ## 3.6. Kernel Instantiation ##
+We use a _generate block_ to instantiate 256 kernel modules, namely, 256 simultaneously running threads. Each kernel module calculates a single color value, so the FPGA can calculate at most 256 values at the same time.
 
 ## 3.7. FSM (Finite-State Machine) ##
+There are 4 states: `IDLE_STATE`, `RECV_STATE`, `EXEC_STATE`, and `SEND_STATE`. After the program starts, the circuit goes to the second state. The second state waits and receives 256 color values, until then, it goes to the third state. The third state processes the 256 received values in parallel, then it goes to the last state. The last state waits and sends 256 new values back, and goes to the first state again.
 
 ## 3.8. Data Interface ##
 
@@ -41,7 +43,7 @@ We want to evaluate `color × 1.125 ^ 1024`.
 | GPGPU Accelerator<br>(CUDA) | Intel Core i7-3770 CPU @ 3.40Ghz 4C8T, 16 GB Memory, Windows 10 Enterprise 64-bit,<br>NVIDIA GeForce GTX 670 |
 | FPGA Accelerator | Intel Core i5-3570 CPU @ 3.40GHz 4C4T, 8 GB Memory, Ubuntu 14.04 LTS 64-bit,<br>Xilinx Virtex-5 ML506 Evaluation Platform |
 
-## 9. Endnote ##
+## 9. Endnotes ##
 Special thanks to Chun-Jen Tsai, associate professor at Dept. of C.S., National Chiao Tung University, Taiwan. Prof. Tsai not only lent me experiment equipment, but gave me some advice on this topic.
 
 ## 10. References ##
