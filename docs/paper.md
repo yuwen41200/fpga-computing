@@ -42,7 +42,7 @@ color &#x000D7; 1.125 ^ 1024
 | FPGA Accelerator | Intel Core i5-3570 CPU @ 3.40GHz 4C4T, 8 GB Memory, Ubuntu 14.04 LTS 64-bit,<br>Xilinx Virtex-5 ML506 Evaluation Platform |
 
 ## 9. Endnote ##
-Special thanks to Chun-Jen Tsai, associate professor at Dept. of C.S., N.C.T.U., Taiwan. Prof. Tsai not only lent me experiment equipment, but gave me some advice on this topic.
+Special thanks to Chun-Jen Tsai, associate professor at Dept. of C.S., National Chiao Tung University, Taiwan. Prof. Tsai not only lent me experiment equipment, but gave me some advice on this topic.
 
 ## 10. References ##
 [2] Xillybus Ltd. (2016). _An FPGA IP Core for Easy DMA over PCIe with Windows and Linux_ [Online]. Available: http://xillybus.com/
