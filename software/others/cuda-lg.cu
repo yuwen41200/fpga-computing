@@ -14,6 +14,7 @@ __global__ void blue(unsigned short *mat, int height, int width)
 		unsigned short mi = mat[i * width + j];
 		for (int k = 0; k < 1024; k++)
 			mi = mi + (mi >> 3);
+		mat[i * width + j] = mi;
 	}
 }
 
