@@ -11,91 +11,35 @@ The performance of the circuit is highly dependent on the quality of the circuit
 We employ RTL (register-transfer level) design by the Verilog HDL (hardware description language), and we use the Xillybus IP core for data transmission over the PCIe interface. Our targeted board is Xilinx Virtex-5 ML506 Evaluation Platform. We use C++ for software design. The host programs run on 64-bit Linux distributions.
 
 ## 3.4. Computation Platform ##
-
 The PC-end (host) is on the left side, whereas the FPGA-end (device) is on the right side.
-
 ![img-demo0][img-demo0]
 
 ## 3.5. Problem Statement ##
-
 color &#x000D7; 1.125 ^ 1024
 
-## Kernel Instantiation ##
+## 3.6. Kernel Instantiation ##
 
-## FSM (Finite-State Machine) ##
+## 3.7. FSM (Finite-State Machine) ##
 
-## Data Interface ##
+## 3.8. Data Interface ##
 
-## Multithreading on Software ##
+## 3.9. Multithreading on Software ##
 
-## Platform Specification ##
-• Serial: Intel Core i5-3570 CPU @ 3.40GHz 4C4T,
-8 GB Memory, Ubuntu 14.04 LTS 64-bit
-• CPU: Intel Core i5-3570 CPU @ 3.40GHz 4C4T,
-8 GB Memory, Ubuntu 14.04 LTS 64-bit,
-using up to 4 threads
-• GPGPU: Intel Core i7-3770 CPU @ 3.40Ghz 4C8T,
-16 GB Memory, Windows 10 Enterprise 64-bit,
-NVIDIA GeForce GTX 670
-• FPGA: Intel Core i5-3570 CPU @ 3.40GHz 4C4T,
-8 GB Memory, Ubuntu 14.04 LTS 64-bit,
-Xilinx Virtex-5 ML506 Evaluation Platform
+## 3.10. Results ##
+| Data Size | Serial<br>(Singlethread) | CPU Multithreading<br>(OpenMP) | GPGPU Accelerator<br>(CUDA) | FPGA Accelerator |
+|:----:|-----:|-----:|-----:|-----:|
+| Small<br>(128 KiB) | 0.179096 s | 0.067667 s | 0.891333 s | 0.000534 s |
+| _Speedup_ | **1.000 x** | **2.647 x** | **0.201 x** | **335.386 x** |
+| Large<br>(~12 MiB) | 15.873200 s | 4.678667 s | 1.799333 s | 0.016104 s |
+| _Speedup_ | **1.000 x** | **3.393 x** | **8.822 x** | **985.668 x** |
 
-## Results ##
-Data Size
-
-Serial
-(Singlethread)
-
-CPU Multithreading
-(OpenMP)
-
-GPGPU Accelerator
-(CUDA)
-
-FPGA Accelerator
-
-Small
-(128 KiB)
-
-0.179096 s
-
-0.067667 s
-
-0.891333 s
-
-0.000534 s
-
-Speedup
-
-1.000 x
-
-2.647 x
-
-0.201 x
-
-335.386 x
-
-Large
-(~12 MiB)
-
-15.873200 s
-
-4.678667 s
-
-1.799333 s
-
-0.016104 s
-
-Speedup
-
-1.000 x
-
-3.393 x
-
-8.822 x
-
-985.668 x
+## 3.11. Platform Specification ##
+| Platform | Detailed Description |
+|:----:|:-----|
+| Serial<br>(Singlethread) | Intel Core i5-3570 CPU @ 3.40GHz 4C4T, 8 GB Memory, Ubuntu 14.04 LTS 64-bit |
+| CPU Multithreading<br>(OpenMP) | Intel Core i5-3570 CPU @ 3.40GHz 4C4T, 8 GB Memory, Ubuntu 14.04 LTS 64-bit, using up to 4 threads |
+| GPGPU Accelerator<br>(CUDA) | Intel Core i7-3770 CPU @ 3.40Ghz 4C8T, 16 GB Memory, Windows 10 Enterprise 64-bit, NVIDIA GeForce GTX 670 |
+| FPGA Accelerator | Intel Core i5-3570 CPU @ 3.40GHz 4C4T, 8 GB Memory, Ubuntu 14.04 LTS 64-bit, Xilinx Virtex-5 ML506 Evaluation Platform |
 
 ## Attribution ##
 Special thanks to Chun-Jen Tsai,
