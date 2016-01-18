@@ -1,5 +1,5 @@
 ## 3. Feasibility Study: FPGA Parallel Heterogeneous Computing ##
-All source codes for this section are available on [https://github.com/yuwen41200/fpga-computing].
+In this section, we are going to examine the effectiveness of FPGA parallel heterogeneous computing, especially for the purpose of video processing. All source codes for this section are available on [https://github.com/yuwen41200/fpga-computing].
 
 ## 3.1. Why FPGAs ? ##
 FPGA is the abbreviation for _field programmable gate array_. We consider FPGAs a suitable choice for heterogeneous computing because FPGAs are essentially massively parallel processors. Furthermore, fully customized hardware design can lead to maximized optimization. Past research has also showed that using FPGAs as accelerators can realize better performance than using GPGPUs. If the data transmission interface is also PCIe, then the cost is almost the same as GPGPUs.
@@ -9,6 +9,8 @@ The performance of the circuit is highly dependent on the quality of the circuit
 
 ## 3.3. Proposed Implementation ##
 We employ RTL (register-transfer level) design by the Verilog HDL (hardware description language), and we use the Xillybus IP core [2] for data transmission over the PCIe interface. Our targeted board is Xilinx Virtex-5 ML506 Evaluation Platform. We use C++ for software design. The host programs run on 64-bit Linux distributions.
+![img-demo1][img-demo1]
+![img-demo2][img-demo2]
 
 ## 3.4. Computation Platform ##
 The PC-end (host) is on the left side, whereas the FPGA-end (device) is on the right side.
@@ -22,10 +24,13 @@ We use a _generate block_ to instantiate 256 kernel modules, namely, 256 simulta
 
 ## 3.7. FSM (Finite-State Machine) ##
 There are 4 states: `IDLE_STATE`, `RECV_STATE`, `EXEC_STATE`, and `SEND_STATE`. After the program starts, the circuit goes to the second state. The second state waits and receives 256 color values, until then, it goes to the third state. The third state processes the 256 received values in parallel, then it goes to the last state. The last state waits and sends 256 new values back, and goes to the first state again.
+![img-demo3][img-demo3]
 
 ## 3.8. Data Interface ##
+To hosts, the device looks just like a file. So we can use low-level (POSIX) file I/O functions to read/write data from/to the device, i.e. the FPGA board.
 
 ## 3.9. Multithreading on Software ##
+For best performance, there are also 2 threads implemented on the host. The first is used to send data, the other is used to receive data.
 
 ## 3.10. Results ##
 | Data Size | Serial<br>(Singlethread) | CPU Multithreading<br>(OpenMP) | GPGPU Accelerator<br>(CUDA) | FPGA Accelerator |
@@ -50,5 +55,8 @@ Special thanks to Chun-Jen Tsai, associate professor at Dept. of C.S., National 
 [2] Xillybus Ltd. (2016). _An FPGA IP Core for Easy DMA over PCIe with Windows and Linux_ [Online]. Available: [http://xillybus.com/]
 
 [https://github.com/yuwen41200/fpga-computing]: https://github.com/yuwen41200/fpga-computing
+[img-demo1]: https://github.com/yuwen41200/fpga-computing/raw/master/docs/demo1.jpg
+[img-demo2]: https://github.com/yuwen41200/fpga-computing/raw/master/docs/demo2.jpg
 [img-demo0]: https://github.com/yuwen41200/fpga-computing/raw/master/docs/demo0.png
+[img-demo3]: https://github.com/yuwen41200/fpga-computing/raw/master/docs/demo3.png
 [http://xillybus.com/]: http://xillybus.com/
