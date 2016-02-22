@@ -53,7 +53,6 @@ int Video() {
 		dim3 blk(32, 32);
 		dim3 grid((rows + 31) / blk.x, (cols + 31) / blk.y);
 		blue << <grid, blk >> >(dmat, rows, cols);
-		cnt += clock() - last;
 		err = cudaGetLastError();
 		if (err != cudaSuccess)
 		{
